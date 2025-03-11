@@ -92,5 +92,44 @@
 			<p>\[ \mathrm{lcm}(1,2,\cdots,20) = 2^4 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot 17 \cdot 19 = 232792560 \]<p>
 			<p>and this is our final answer</p>
 		</details>
+		
+		<h2><a href="https://projecteuler.net/problem=6">6.- Sum Square Difference</a></h2>
+		<p>The sum of the squares of the first ten natural numbers is,</p>
+		<p>\[1^2+2^2+\cdots+10^2 = 358.\]</p>
+		<p>The square of the sum of the first ten natural numbers is,
+		<p>\[(1+2+\cdots+10)^2 = 3025.\]</p>
+		<p>Hence the difference between the sum of the squares of the first ten natural numbers and the square of the sum is \(3025-385\).</p>
+		<p>Find the difference between the sum of the squares of the first one hundred natural numbers and the square of the sum.</p>
+		
+		<details>
+			<summary>Solution</summary>	
+			<p>The sum of the first \(n\) numbers is given by the triangular number formula \( \sum_{k=1}^n k = \frac{n (n+1)}{2} \). On the other hand, the sum of the squares of the first \(n\) numbers has a similar but slightly more complicated formula:</p>
+			<p>\[ 1^2 + 2^2 + \cdots + n^2 = \sum_{k=1}^n k^2 = \frac{n (n+1) (2n+1)}{6}. \]</p>
+			<p>Therefore, the difference between the sum of squares and the square of the sum of the first \(n\) numbers is given by</p>
+			<p>\begin{align*}
+				\left( \sum_{k=1}^n k \right)^2 - \sum_{k=1}^n k^2 & = \left( \frac{n (n+1)}{2} \right)^2 - \frac{n (n+1)(2n+1)}{6} = \\
+				& = \frac{1}{12} (3 n^2 (n+1)^2 - 2 n (n+1) (2n+1)) = \\
+				& = \frac{n(n+1)}{12}(3n(n+1) - 2(2n+1)) = \\
+				& = \frac{n(n+1)}{12}(3n^2 +3n - 4n - 2) = \\
+				& = \frac{n (n+1) (3n^2 - n - 2)}{12} = \frac{n (n+1)(3n+2)(n-1)}{12}.
+			\end{align*}</p>
+			<p>So, substituting with \(n=100\), we obtain</p>
+			<p>\[\frac{100 \cdot 101 \cdot 302 \cdot 99}{12} = \frac{301969800}{12} = 25164150, \]</p>
+			<p>which is our final answer.</p>
+		</details>
+		
+		<h2><a href="https://projecteuler.net/problem=15">15.- Lattice Paths</a></h2>
+		<p>Starting in the top left corner of a \(2 \times 2\) grid, and only being able to move to the right and down, there are exactly routes to the bottom right corner.</p>
+		<img src="https://projecteuler.net/resources/images/0015.png?1678992052" />
+		<p>How many such routes are there through a \(20 \times 20\) grid?</p>
+		
+		<details>
+			<summary>Solution</summary>	
+			In a \(n \times n\) grid, to go to from the top left corner to the bottom right corner, we must always move \(n\) steps to the right and \(n\) steps down according to the constraints of this problem. Therefore, a path depeds only on which order we take these steps. For example, in the image, the top left path follows the ordering <i>right right down down</i> and the bottom middle path follows <i>down right down right</i>.</p>
+			
+			<p>For each possible ordering of these steps there is one path; and for each possible path there is one order. Choosing a path and choosing an ordering is equivalent. Therefore the number of possible routes on a \(n \times n\) grid is the number of possible orders to be chosen. In this choice, we must choose to place \(n\) steps down and \(n\) steps right in a sequence of \(2n\) steps, so this number of choices is given by the combination formula \( \binom{2n}{n} = \frac{(2n)!}{n! n!} \). Therefore, we have that the number of possible routes in a \(20 \times 20\) grid is</p>
+			<p>\[ \binom{40}{20} = \frac{40!}{20! 20!} = \frac{21 \cdot 22 \cdot \cdots \cdot 40}{1 \cdot 2 \cdot \cdots \cdot 20} = 137846528820 \]</p>
+			<p>and this is our final answer.</p>
+		</details>
 	</div> </body>
 </html>
