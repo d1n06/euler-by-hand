@@ -1,6 +1,15 @@
 .content {
-  margin: auto 20% auto 20%;
-  text-align: justify;
+	margin: auto 25% auto 25%;
+	text-align: justify;
+}
+
+.nav {
+	display: block;
+	position: fixed;
+	top: 5%;
+	left: 2.5%;
+	width: 20%;
+	height: 90%;
 }
 
 img {
