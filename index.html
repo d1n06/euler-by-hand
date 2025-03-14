@@ -19,6 +19,8 @@
 		<h1 style="text-align: center">Project Euler by hand</h1>
 		<h3 style="text-align: center">solving Project Euler problems by hand</h3>
 		<p>This site is an attempt to solve and explain the solution of as many <a href="projecteuler.net">Project Euler</a> problems using only math and possibly a calculator (but only for simple calculations) and sometimes the internet. Many Project Euler problems can be easily solved with simple computer programs, so let's do it the hard way.</p>
+		
+		<p>Publishing the solutions of problems beyond the first 100 problems isn't allowed, but I doubt I'll even make it that far.</p>
 
 
 		<h2><a href="https://projecteuler.net/problem=1">1.- Multiples of 3 or 5</a></h2>
@@ -118,6 +120,43 @@
 			<p>which is our final answer.</p>
 		</details>
 		
+		<h2><a href="https://projecteuler.net/problem=9">9.- Special Pythagorean Triplet</a></h2>
+		<p>A Pythagorean triplet is a set of three natural numbers, \(a < b < c\), for which,</p>
+		<p>\[a^2+b^2=c^2\]</p>
+		<p>For example, \(3^2+4^2 = 9+16=25=5^2\).</p>
+		<p>There exists exactly one Pythagorean triplet for which \(a+b+c=1000\).</p>
+		<p>Find the product \(abc\).</p>
+		
+		<details>
+			<summary>Solution</summary>	
+			<p>Every Pythagorean triplet can be written as</p>
+			<p>\[ (a,b,c) = (d (m^2-n^2),2 d m n, d (m^2+n^2)) \]</p>
+			for some \(d,m,n \in \mathbb N\) with \(m > n\). If we assume that \(d\), \(m\) and \(n\) are such numbers (we dont't know if \(d (m^2-n^2)\) corresponds to \(a\) or \(b\), but we do know that \(c = d (m^2+n^2) \)), we have that</p>
+			<p>\[ a+b+c = d(m^2-n^2) + 2 dmn + d(m^2 + n^2) = 2 d m^2 + 2 d m n = 1000 \Longrightarrow d m(m + n) = 500 \]</p>
+			<p>We can write \(d m (m+n) = 500 = 2^2 \cdot 5^3\). This number doesn't have many divisors, only twelve, so we can check them one by one. All the possible divisors of \(500\) and therefore values of \(d\) and \(m\) are \(1, 2, 4, 5, 10, 20, 25, 50, 100, 125, 250, 500\). Some combinations of \(d\) and \(m\) with these values are not valid, since \(d m\) would stop being a divisor of \(500\). For example, \(d = 20\) and \(m = 2\) would give \(dm = 40\), which is not a divior of \(500\). Checking all the valid choices of \(d\) and \(m\), we obtain the corresponding values of \(n = 500/(dm) - m\):</p>
+			<p>\begin{array}{r|cccccccccccc}
+				 & 1 & 2 & 4 & 5 & 10 & 20 & 25 & 50 & 100 & 125 & 250 & 500 \\ \hline
+				1 & 499 & 248 & 121 & 95 & 40 & \textcolor{red}{5} & -5 & -40 & -195 & -121 & -248 & -499 \\
+				2 & 249 & 123 &  & 45 & 15 &  & -15 & -45 &  & -123 & -249 &  \\
+				4 & 124 &  &  & 20 &  &  & -20 &  &  & -124 &  &  \\
+				5 & 99 & 48 & 21 & 15 & 0 & -15 & -21 & -48 & -99 &  &  &  \\
+				10 & 49 & 23 &  & 5 & -5 &  & -23 & -49 &  &  &  &  \\
+				20 & 24 &  &  & 0 &  &  & -24 &  &  &  &  &  \\
+				25 & 19 & 8 & \textcolor{red}{1} & -1 & -8 & -19 &  &  &  &  &  &  \\
+				50 & 9 & 3 &  & -3 & -9 &  &  &  &  &  &  &  \\
+				100 & 4 &  &  & -4 &  &  &  &  &  &  &  &  \\
+				125 & 3 & 0 & -3 &  &  &  &  &  &  &  &  &  \\
+				250 & 1 & -1 &  &  &  &  &  &  &  &  &  &  \\
+				500 & 0 & &  &  &  &  &  &  &  &  &  &  \\
+			\end{array}</p>
+			<p>Here each column corresponds to a value of \(m\) and each row to a value of \(d\). Marked in red are the only two combinations such that \(m > n > 0\). Both give the same triplet, since if \(d=1\), \(m=20\) and \(n = 5\), we have</p>
+			<p>\[ a = d (m^2-n^2) = 1 \cdot (20^2-5^2) = 375, \quad b = 2 d m n = 2 \cdot 1 \cdot 20 \cdot 5 = 200, \quad c = d (m^2 + n^2) = 1 \cdot(20^2 + 5^2) = 425, \] </p>
+			<p>and if \(d=25\), \(m=4\) and \(n=1\), we have</p>
+			<p>\[ a = d (m^2-n^2) = 25 \cdot (4^2-1^2) = 375, \quad b = 2 d m n = 2 \cdot 25 \cdot 4 \cdot 1 = 200, \quad c = d (m^2 + n^2) = 25 \cdot(4^2 + 1^2) = 425 \] </p>
+			<p>These three numbers clearly have \(a+b+c = 500\) and \(a^2 + b^2 = 180625 = c^2 \). Therefore, our answer is</p>
+			<p>\[ a b c = 375 \cdot 200 \cdot 425 = 31875000 \]</p>
+		</details>
+		
 		<h2><a href="https://projecteuler.net/problem=15">15.- Lattice Paths</a></h2>
 		<p>Starting in the top left corner of a \(2 \times 2\) grid, and only being able to move to the right and down, there are exactly routes to the bottom right corner.</p>
 		<img src="https://projecteuler.net/resources/images/0015.png?1678992052" />
@@ -130,6 +169,39 @@
 			<p>For each possible ordering of these steps there is one path; and for each possible path there is one order. Choosing a path and choosing an ordering is equivalent. Therefore the number of possible routes on a \(n \times n\) grid is the number of possible orders to be chosen. In this choice, we must choose to place \(n\) steps down and \(n\) steps right in a sequence of \(2n\) steps, so this number of choices is given by the combination formula \( \binom{2n}{n} = \frac{(2n)!}{n! n!} \). Therefore, we have that the number of possible routes in a \(20 \times 20\) grid is</p>
 			<p>\[ \binom{40}{20} = \frac{40!}{20! 20!} = \frac{21 \cdot 22 \cdot \cdots \cdot 40}{1 \cdot 2 \cdot \cdots \cdot 20} = 137846528820 \]</p>
 			<p>and this is our final answer.</p>
+		</details>
+		
+		<h2><a href="https://projecteuler.net/problem=24">24.- Lexicographic Permutations</a></h2>
+		<p>A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation of the digits 1, 2, 3 and 4. If all of the permutations are listed numerically or alphabetically, we call it lexicographic order. The lexicographic permutations of 0, 1 and 2 are:</p>
+		<p style="text-align: center">012   021   102   120   201   210</p>
+		<p>What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?</p>
+		
+		<details>
+			<summary>Solution</summary>	
+			<p>When considering the permutations of \(n\) digits, there is a total of \(n!\) permutations and \((n-1)!\) permutations that start by each digit. The first \((n-1)!\) permutations start with \(0\), the next \((n-1)!\) start with \(1\), and so on.</p>
+			<p>Considering that the permutations start at the \(0\)th place, we have to find the \(999999\)th permutation. We can find the representation of this permutation using the following algorithm:</p>
+			<ul>
+				<li> To find the first digit of the \(m\)-th permutation, write \(m = a \cdot (n-1)! + b \) with \(a,b \in \mathbb N\) and \(b < (n-1)!\). The first digit of the permutation will be \(a\).
+				<li> Cross out \(a\) off your list of reminding digits.
+				<li> The second digit of the \(m\)-th permutation will be the first digit of the \(b\)-th permutation of the reminding digits. In fact, the rest of the permutation you haven't found is the \(b\)-th permutation of the reminding digits.
+				<li> Repeat until you've found all digits.
+			</ul>
+			<p>For example, to find the third, permutation of the digits \(0\), \(1\) and \(2\), we write \(2 = 1 \cdot (3-1)! + 0 \) (remember, we use \(2\) instead of \(3\) because we start at the \(0\)th permutation). Then, the first digit of our permutation will be \(1\). The second digit will be the first digit of the \(0\)th permutation of \(0\) and \(2\), so we write \(0 = 0 \cdot (2-1)! + 0\) and the second digit is \(0\). The only remaining digit is \(2\), which is also the \(0\)th permutation of the digit \(2\). Therefore, the third permutation of \(0\), \(1\) and \(2\) is \(102\), as we see in the problem statement.</p>
+			<p>Let's repeat this process but for \(9\) digits and the \(999999\)th permutation:</p>
+			<p>\begin{array}{c|ccc|c}
+				n & (n-1)! & m = a \cdot (n-1)! + b & \text{digit} & 0123456789 \\ \hline
+				10 & 362880 & 999999 = 2 \cdot 362880 + 274239 & 2 & 01\phantom{2}3456789 \\
+				9 & 40320 & 274239 = 6 \cdot 40320 + 32319 & 7 & 01\phantom{2}3456\phantom{7}89 \\
+				8 & 5040 & 32319 = 6 \cdot 5040 + 2079 & 8 & 01\phantom{2}3456\phantom{78}9 \\
+				7 & 720 & 2079 = 2 \cdot 720 + 639 & 3 & 01\phantom{23}456\phantom{78}9 \\
+				6 & 120 & 639 = 5 \cdot 120 + 39 & 9 & 01\phantom{23}456\phantom{789} \\
+				5 & 24 & 39 = 1 \cdot 24 + 15 & 1 & 0\phantom{123}456\phantom{789} \\
+				4 & 6 & 15 = 2 \cdot 6 + 3 & 5 & 0\phantom{123}4\phantom{5}6\phantom{789} \\
+				3 & 2 & 3 = 1 \cdot 2 + 1 & 4 & 0\phantom{12345}6\phantom{789} \\
+				2 & 1 & 1 = 1 \cdot 1 + 1 & 6 & 0\phantom{123456789} \\
+				1 & 1 & 0 = 0 \cdot 1 + 0 & 0 & 
+			\end{array}</p>
+			<p>So the millionth permutation is \(2783915460\).
 		</details>
 	</div> </body>
 </html>
