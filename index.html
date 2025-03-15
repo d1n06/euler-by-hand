@@ -21,6 +21,7 @@
 		<ul>
 			<li><a href="#problem-1">1.- Multiples of \(3\) or \(5\)</a>
 			<li><a href="#problem-2">2.- Even Fibonacci Numbers</a>
+			<li><a href="#problem-4">4.- Largest Palindrome Product</a>
 			<li><a href="#problem-5">5.- Smallest Multiple</a>
 			<li><a href="#problem-6">6.- Sum Square Difference</a>
 			<li><a href="#problem-9">9.- Special Pythagorean Triplet</a>
@@ -84,6 +85,43 @@
 			<p>and this is our final answer.</p>
 		</details>
 		
+		<h2 id="problem-4"><a href="https://projecteuler.net/problem=4">4.- Largest Palindrome Product</a></h2>
+		<p>A palindromic number reads the same both ways. The largest palindrome made from the product of two \(2\)-digit numbers is \(9009 = 91 \times 99\).</p>
+		<p>Find the largest palindrome made from the product of two \(3\)-digit numbers.</p>
+		
+		<details>
+			<summary>Solution</summary>		
+			<p>The biggest product of two \(3\)-digit numbers is \(999 \cdot 999 = 998001\), so the best we can hope for is a \(6\)-digit number. Let's see that any \(6\)-digit palindromic number is a multiple of \(11\). If we write this number as \(\underline{abccba}\), where \(a,b,c \in \{0,1,\dots,9\}\) and the underlining means that this is the number's decimal representation, then,</p>
+			<p>\[ \underline{abccba} = 100001 a + 10010 b + 1100 c = 11 \cdot (9091 a + 910 b + 100 c), \]</p>
+			<p>so \(\underline{abccba}\) is a multiple of \(11\). Therefore, if \(x\) and \(y\) are the two \(3\)-digit numbers such that \(x y = \underline{abccba}\), we can assume that \(y\) is a multiple of \(11\).</p>
+			<p>The largest \(3\)-digit multiple of \(11\) is \(990 = 11*90\), but notice that its last digit is \(0\), so the first digit of \(xy\), which is \(a\), will also be \(0\). We don't want this, since this will mean that the most significant digit of our palindromic number will be \(0\) and it will be small. It won't even be a \(6\)-digit number. Actually, we don't immediately know if there are any \(6\)-digit palindromic numbers that don't start with \(0\), so it is possible that we should be looking at \(5\)-digit numbers instead. However, we can easily find \(11^4 = 121 \cdot 121 = 14641\), which is a \(6\)-digit palindromic number and a product of two \(3\)-digit numbers, so we at least know that we are on the right path.</p>
+			<p>Let's be greedy and try to look for a \(6\)-digit palindromic number with \(a = 9\). So, if \(y = 990\) isn't good, let's try the previous multiple of \(11\), which is \(y = 11 \cdot 89 = 979\). Since its last digit is \(9\), we want the last digit of \(x\) to be \(1\) so we get \(a = 9\). Then, we have \(90\) possible choices for the value of \(x\), from \(101\) to \(991\). However, we notice that \(911 \cdot 979 = 891869\) and \(921 \cdot 979 = 901659\), so our only choices for \(x\) are \(921,931,941,951,961,971,981\) and \(991\), since anything smaller than \(x = 921\) won't make \(xy\) have \(9\) at it's first digit. Let's check all these values for palindromic numbers:</p>
+			<p>\begin{array}{c|c}
+				x & x y = 979 x \\ \hline
+				991 & 991 \cdot 979 = 970189 \\
+				981 & 981 \cdot 979 = 960399 \\
+				971 & 971 \cdot 979 = 950609 \\
+				961 & 961 \cdot 979 = 940819 \\
+				951 & 951 \cdot 979 = 931029 \\
+				941 & 941 \cdot 979 = 921239 \\
+				931 & 931 \cdot 979 = 911449 \\
+				921 & 921 \cdot 979 = 901659
+			\end{array}</p>
+			<p>No luck, so let's try lower multiples of \(11\). The next one is \(y = 11 \cdot 88 = 968\), but notice that we don't want even multiples since we won't be able to get \(a = 9\) with these for similar reasons that we didn't want \(y = 990\). So the next multiple is \(y = 11 \cdot 87 = 957\). since \(7\cdot 7 = 49\), we want the last digit of \(x\) to be \(7\), and since \(937 \cdot 957 = 896709\) and \(947 \cdot 957 = 906279\), our choices for \(x\) are \(947, 957, 967, 977, 987\) and \(997\):</p>
+			<p>\begin{array}{c|c}
+				x & x y = 957 x \\ \hline
+				997 & 997 \cdot 957 = 954129 \\
+				987 & 987 \cdot 957 = 944559 \\
+				977 & 977 \cdot 957 = 934989 \\
+				967 & 967 \cdot 957 = 925419 \\
+				957 & 957 \cdot 957 = 915849 \\
+				947 & 947 \cdot 957 = 906279
+			\end{array}</p>
+			<p>No luck either, so the next candidate for \(y\) is \(y = 11 \cdot 85 = 935\), but this isn't good either since we can't get \(a = 9\) if the last digit of \(y\) is \(5\). So the next candidate is \(y = 11 \cdot 83 = 913\), which means that \(x\) should have \(3\) as its last digit. This time, \(983 \cdot 913 = 897479\), so the only candidate is \(993 \cdot 913 = 906609\), which is palindromic!</p>
+			<p>We've found our first palindromic number. Can we be sure that it is the largest one that is a product of two \(3\)-digit numbers? There might be a lower choice of \(y\) but higher choice of \(x\) that also get us a palindromic number that is higher. However, we see that this is impossible, since the next choice of \(y\) is \(y = 11 \cdot 81 = 891\), which has \(999 \cdot 891 = 890109\), so no lower choices of \(y\) can give us a palindromic number that starts with a \(9\).</p>
+			<p>We have exhausted all possibilities to find a palindromic number that starts with a \(9\) and the only one we've found is \(906609\), which is our final answer.</p>
+		</details>
+		
 		<h2 id="problem-5"><a href="https://projecteuler.net/problem=5">5.- Smallest Multiple</a></h2>
 		<p>\(2520\) is the smallest number that can be divided by each of the numbers from \(1\) to \(10\) without any remainder.</p>
 		<p>What is the smallest positive number that is evenly divisible by all of the numbers from \(1\) to \(20\)?</p>
@@ -105,7 +143,7 @@
 				19&   &   &   &   &   &   &   &   &   &    &    &    &    &    &    &    &    &    & 1  &    & 1 \\
 			\end{array} \]</p>
 			<p>Therefore, the number we are looking for is</p>
-			<p>\[ \mathrm{lcm}(1,2,\cdots,20) = 2^4 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot 17 \cdot 19 = 232792560 \]<p>
+			<p>\[ \mathrm{lcm}(1,2,\dots,20) = 2^4 \cdot 3^2 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot 17 \cdot 19 = 232792560 \]<p>
 			<p>and this is our final answer</p>
 		</details>
 		
@@ -220,7 +258,7 @@
 		
 		<h2 id="problem-25"><a href="https://projecteuler.net/problem=25">25.- \(1000\)-digit Fibonacci Number<a></h2>
 		<p>The Fibonacci sequence is defined by the recurrence relation:</p>
-		<p>\(F_n = F_{n-1} + F_{n-2}\) where \(F_1 = 1\) and \(F_2 = 1\).</p>
+		<blockquote>\(F_n = F_{n-1} + F_{n-2}\) where \(F_1 = 1\) and \(F_2 = 1\).</blockquote>
 		<p>Hence the first 12 terms will be:</p>
 		<p>\[F_1 = 1\]</p>
 		<p>\[F_2 = 1\]</p>
