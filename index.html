@@ -31,6 +31,7 @@
 			<li><a href="#problem-24">24.- Lexicographic Permutations</a>
 			<li><a href="#problem-25">25.- \(1000\)-digit Fibonacci Number</a>
 			<li><a href="#problem-40">40.- Champernowne's Constant</a>
+			<li><a href="#problem-69">69.- Totient Maximum</a>
 		</ul>
 	</div>
 	<div class="content">
@@ -431,6 +432,62 @@
 			\end{array} \]</p>
 			<p>Therefore, our solution is \(1 \cdot 1 \cdot 5 \cdot 3 \cdot 7 \cdot 2 \cdot 1 = 210\).</p>
 			<p class="sign">- dino (2025/04/04)</p>
+		</details>
+		
+		<h2 id="problem-69"><a href="https://projecteuler.net/problem=69">69.- Totient Maximum</a></h2>
+		<p>Euler's totient function, \(\phi(n)\) [sometimes called the phi function], is defined as the number of positive integers not exceeding \(n\) which are relatively prime to \(n\). For example, as \(1\), \(2\), \(4\), \(5\), \(7\), and \(8\), are all less than or equal to nine and relatively prime to nine, \(\phi(9)=6\).</p>
+		<div style="text-align: center;">
+		<table style="text-align: center; margin-left: auto; margin-right: auto;"><tr><td><b>\(n\)</b></td>
+		<td><b>Relatively Prime</b></td>
+		<td><b>\(\phi(n)\)</b></td>
+		<td><b>\(n/\phi(n)\)</b></td>
+		</tr><tr><td>2</td>
+		<td>1</td>
+		<td>1</td>
+		<td>2</td>
+		</tr><tr><td>3</td>
+		<td>1,2</td>
+		<td>2</td>
+		<td>1.5</td>
+		</tr><tr><td>4</td>
+		<td>1,3</td>
+		<td>2</td>
+		<td>2</td>
+		</tr><tr><td>5</td>
+		<td>1,2,3,4</td>
+		<td>4</td>
+		<td>1.25</td>
+		</tr><tr><td>6</td>
+		<td>1,5</td>
+		<td>2</td>
+		<td>3</td>
+		</tr><tr><td>7</td>
+		<td>1,2,3,4,5,6</td>
+		<td>6</td>
+		<td>1.1666...</td>
+		</tr><tr><td>8</td>
+		<td>1,3,5,7</td>
+		<td>4</td>
+		<td>2</td>
+		</tr><tr><td>9</td>
+		<td>1,2,4,5,7,8</td>
+		<td>6</td>
+		<td>1.5</td>
+		</tr><tr><td>10</td>
+		<td>1,3,7,9</td>
+		<td>4</td>
+		<td>2.5</td>
+		</tr></table></div>
+		<p>It can be seen that \(n = 6\) produces a maximum \(n/\phi(n)\) for \(n\leq 10\).</p>
+		<p>Find the value of \(n\leq 1\,000\,000\) for which \(n/\phi(n)\) is a maximum.</p>
+		
+		<details>
+			<summary>Solution</summary>	
+			<p>We can make use of Euler's totient function's properties to solve this problem. For a start, it is multiplicative, which in the context of number theory means that \(\phi(n m) = \phi(n) \phi(m)\) if \(n\) and \(m\) are coprime numbers. For example, \(\phi(6) = \phi(2) \phi(3) = 1 \cdot 2 = 2\), so \(6 / \phi(6) = 3\). Another thing we notice is that every number under a prime number \(p\) is relatively prime with \(p\), so \(\phi(p) = p-1\) and \(p / \phi(p) = 1 + \frac{1}{p}\).</p>
+			<p>But most importantly, we notice that when we multiply a number \(n\) by one of its prime factors \(p\), the resulting ration \(np / \phi(np)\) is the same as \(n / \phi(n)\). This is because there are \(\phi(n)\) numbers relatively prime to \(n p\) from \(1\) to \(p\); there are \(\phi(n)\) relatively prime numbers from \(p+1\) to \(2p\); and so on: there are \(\phi(n)\) relatively prime numbers in every interval \(kp+1\) to \((k+1) p\), and since there are \(p\) of these intervals, \( \phi(np) = \phi(n) p \), so \(np / \phi(np) = np / (\phi(n) p) = n / \phi(n)\). For example, \(\phi(6) = 2\), \(\phi(12) = 4\) and \(\phi(18) = 6\), and these three numbers have the same ratio \(n / \phi(n) = 3\).</p>
+			<p>Therefore, if we factorize a number \(n\), we don't care about the exponents over its prime factors, but just what prime factors it has. Since \(p / \phi(p) = 1 + \frac{1}{p}\) is greater than \(1\) but also decreases as \(p\) increases, we want this number \(n\) to have many prime factors and for these prime numbers to be small. If one of these factors is raised to some power different than \(1\), we are making \(n\) unnecessarily large and we might be loosing the chance to add more prime factors. Therefore, the ideal number would be one like \(2 \cdot 3 \cdot 5 \cdot 7\), the product of succesive prime numbers. These numbers are called the <i>primorials</i>. A list of the first primorials can be found in the OEIS as sequence <a href="https://oeis.org/A002110">A002110</a>.</p>
+			<p>We can see that \(2 \cdot 3 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot 17 = 510510\), while the next primordial is \(510510 \cdot 19 = 9699690\), which is greater than \(1000000\). Therefore, our answer is \(510510\), which has \(\phi(510510\) = 92160\) and \(510510/\phi(510510) = 510510/92160 \approx 5.5394\).</p>
+			<p class="sign">- dino (2025/04/07)</p>
 		</details>
 	</div>
 	</body>
