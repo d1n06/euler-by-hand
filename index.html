@@ -37,9 +37,11 @@
 	<div class="content">
 		<h1 style="text-align: center">Project Euler by hand</h1>
 		<h3 style="text-align: center">solving Project Euler problems by hand</h3>
-		<p>This site is an attempt to solve and explain the solution of as many <a href="https://projecteuler.net">Project Euler</a> problems using only math and possibly a calculator (but only for simple calculations) and sometimes the internet. Many Project Euler problems can be easily solved with simple computer programs, so let's do it the hard way.</p>
+		<p>This site is an attempt to solve and explain the solution of as many <a href="https://projecteuler.net">Project Euler</a> problems using only math and possibly a calculator (but only for simple calculations) and sometimes the internet. Many Project Euler problems can be easily solved with simple computer programs, so let's do it the hard way!</p>
 		
-		<p>Publishing the solutions of problems beyond the first 100 problems isn't allowed, but I doubt I'll even make it that far.</p>
+		<p>Yes, this defeats the entire purpose of Project Euler, since it's supposed to be about writing smart and fast computer programs, not whatever this is (wait till you see the sudoku one). Also, Publishing the solutions of problems beyond the first 100 problems isn't allowed, but I doubt I'll even make it that far.</p>
+		
+		<p>Number of projects solved so far: <b>12</b></p>
 
 
 		<h2 id="problem-1"><a href="https://projecteuler.net/problem=1">1.- Multiples of 3 or 5</a></h2>
@@ -100,7 +102,7 @@
 			<p>The biggest product of two \(3\)-digit numbers is \(999 \cdot 999 = 998001\), so the best we can hope for is a \(6\)-digit number. Let's see that any \(6\)-digit palindromic number is a multiple of \(11\). If we write this number as \(\underline{abccba}\), where \(a,b,c \in \{0,1,\dots,9\}\) and the underlining means that this is the number's decimal representation, then,</p>
 			<p>\[ \underline{abccba} = 100001 a + 10010 b + 1100 c = 11 \cdot (9091 a + 910 b + 100 c), \]</p>
 			<p>so \(\underline{abccba}\) is a multiple of \(11\). Therefore, if \(x\) and \(y\) are the two \(3\)-digit numbers such that \(x y = \underline{abccba}\), we can assume that \(y\) is a multiple of \(11\).</p>
-			<p>The largest \(3\)-digit multiple of \(11\) is \(990 = 11*90\), but notice that its last digit is \(0\), so the first digit of \(xy\), which is \(a\), will also be \(0\). We don't want this, since this will mean that the most significant digit of our palindromic number will be \(0\) and it will be small. It won't even be a \(6\)-digit number. Actually, we don't immediately know if there are any \(6\)-digit palindromic numbers that don't start with \(0\), so it is possible that we should be looking at \(5\)-digit numbers instead. However, we can easily find \(11^4 = 121 \cdot 121 = 14641\), which is a \(6\)-digit palindromic number and a product of two \(3\)-digit numbers, so we at least know that we are on the right path.</p>
+			<p>The largest \(3\)-digit multiple of \(11\) is \(990 = 11*90\), but notice that its last digit is \(0\), so the first digit of \(xy\), which is \(a\), will also be \(0\). We don't want this, since this will mean that the most significant digit of our palindromic number will be \(0\) and it will be small. It won't even be a \(6\)-digit number.</p>
 			<p>Let's be greedy and try to look for a \(6\)-digit palindromic number with \(a = 9\). So, if \(y = 990\) isn't good, let's try the previous multiple of \(11\), which is \(y = 11 \cdot 89 = 979\). Since its last digit is \(9\), we want the last digit of \(x\) to be \(1\) so we get \(a = 9\). Then, we have \(90\) possible choices for the value of \(x\), from \(101\) to \(991\). However, we notice that \(911 \cdot 979 = 891869\) and \(921 \cdot 979 = 901659\), so our only choices for \(x\) are \(921,931,941,951,961,971,981\) and \(991\), since anything smaller than \(x = 921\) won't make \(xy\) have \(9\) at it's first digit. Let's check all these values for palindromic numbers:</p>
 			<p>\begin{array}{c|c}
 				x & x y = 979 x \\ \hline
@@ -422,13 +424,13 @@
 			<p>so \(d_{100} = 5\). We can find the rest of the digits with this method:</p>
 			<p>\[ \begin{array}{c|c|c|c|c}
 				m & n \text{ (Section)} & m-s \text{ (Position in section)} & \text{Integer} & d_m \\ \hline
-				1 & 1 & 1-1 = 0 = 0 \cdot 1 + 0 & \left\lfloor \frac{1-1}{1} \right\rfloor + 10^0 = {\color{red}1} & 1 \\
-				10 & 2 & 10 - 10 = 0 = 0 \cdot 2 + 0 & \left\lfloor \frac{10-10}{2} \right\rfloor + 10^1 = {\color{red}1}0 & 1 \\
-				100 & 2 & 100 - 10 = 90 = 45 \cdot 2 + 0 & \left\lfloor \frac{100-10}{2} \right\rfloor + 10^1 = {\color{red}5}5 & 5 \\
-				1000 & 3 & 1000 - 190 = 810 = 270 \cdot 3 + 0 & \left\lfloor \frac{1000-190}{3} \right\rfloor + 10^2 = {\color{red}3}70 & 3 \\
-				10000 & 4 & 10000 - 2890 = 7110 = 1777 \cdot 4 + 2 & \left\lfloor \frac{10000-2890}{4} \right\rfloor + 10^3 = 27{\color{red}7}7 & 7 \\
-				100000 & 5 & 100000 - 38890 = 61110 = 12222 \cdot 5 + 0 & \left\lfloor \frac{100000-38890}{5} \right\rfloor + 10^4 = {\color{red}2}2222 & 2 \\
-				1000000 & 6 & 1000000 - 488890 = 511110 = 85185 \cdot 6 + 0 & \left\lfloor \frac{1000000-488890}{6} \right\rfloor + 10^5 = {\color{red}1}85185 & 1 \\
+				1 & 1 & 1-1 = 0 = 0 \cdot 1 + 0 & {\color{red}1} & 1 \\
+				10 & 2 & 10 - 10 = 0 = 0 \cdot 2 + 0 & {\color{red}1}0 & 1 \\
+				100 & 2 & 100 - 10 = 90 = 45 \cdot 2 + 0 & {\color{red}5}5 & 5 \\
+				1000 & 3 & 1000 - 190 = 810 = 270 \cdot 3 + 0 & {\color{red}3}70 & 3 \\
+				10000 & 4 & 10000 - 2890 = 7110 = 1777 \cdot 4 + 2 & 27{\color{red}7}7 & 7 \\
+				100000 & 5 & 100000 - 38890 = 61110 = 12222 \cdot 5 + 0 & {\color{red}2}2222 & 2 \\
+				1000000 & 6 & 1000000 - 488890 = 511110 = 85185 \cdot 6 + 0 & {\color{red}1}85185 & 1 \\
 			\end{array} \]</p>
 			<p>Therefore, our solution is \(1 \cdot 1 \cdot 5 \cdot 3 \cdot 7 \cdot 2 \cdot 1 = 210\).</p>
 			<p class="sign">- dino (2025/04/04)</p>
@@ -436,57 +438,27 @@
 		
 		<h2 id="problem-69"><a href="https://projecteuler.net/problem=69">69.- Totient Maximum</a></h2>
 		<p>Euler's totient function, \(\phi(n)\) [sometimes called the phi function], is defined as the number of positive integers not exceeding \(n\) which are relatively prime to \(n\). For example, as \(1\), \(2\), \(4\), \(5\), \(7\), and \(8\), are all less than or equal to nine and relatively prime to nine, \(\phi(9)=6\).</p>
-		<div style="text-align: center;">
-		<table style="text-align: center; margin-left: auto; margin-right: auto;"><tr><td><b>\(n\)</b></td>
-		<td><b>Relatively Prime</b></td>
-		<td><b>\(\phi(n)\)</b></td>
-		<td><b>\(n/\phi(n)\)</b></td>
-		</tr><tr><td>2</td>
-		<td>1</td>
-		<td>1</td>
-		<td>2</td>
-		</tr><tr><td>3</td>
-		<td>1,2</td>
-		<td>2</td>
-		<td>1.5</td>
-		</tr><tr><td>4</td>
-		<td>1,3</td>
-		<td>2</td>
-		<td>2</td>
-		</tr><tr><td>5</td>
-		<td>1,2,3,4</td>
-		<td>4</td>
-		<td>1.25</td>
-		</tr><tr><td>6</td>
-		<td>1,5</td>
-		<td>2</td>
-		<td>3</td>
-		</tr><tr><td>7</td>
-		<td>1,2,3,4,5,6</td>
-		<td>6</td>
-		<td>1.1666...</td>
-		</tr><tr><td>8</td>
-		<td>1,3,5,7</td>
-		<td>4</td>
-		<td>2</td>
-		</tr><tr><td>9</td>
-		<td>1,2,4,5,7,8</td>
-		<td>6</td>
-		<td>1.5</td>
-		</tr><tr><td>10</td>
-		<td>1,3,7,9</td>
-		<td>4</td>
-		<td>2.5</td>
-		</tr></table></div>
+		<p>\[ \begin{array}{cccc}
+			n & \text{Relatively Prime} & \phi(n) & n / \phi(n) \\ \hline
+			2 & 1 & 1 & 2 \\
+			3 & 1,2 & 2 & 1.5 \\
+			4 & 1,3 & 2 & 2 \\
+			5 & 1,2,3,4 & 4 & 1.25 \\
+			6 & 1,5 & 2 & 3 \\
+			7 & 1,2,3,4,5,6 & 6 & 1.1666\dots \\
+			8 & 1,3,5,7 & 4 & 2 \\
+			9 & 1,2,4,5,7,8 & 6 & 1.5 \\
+			10 & 1,3,7,9 & 4 & 2.5
+		\end{array} \]</p>
 		<p>It can be seen that \(n = 6\) produces a maximum \(n/\phi(n)\) for \(n\leq 10\).</p>
 		<p>Find the value of \(n\leq 1\,000\,000\) for which \(n/\phi(n)\) is a maximum.</p>
 		
 		<details>
 			<summary>Solution</summary>	
-			<p>We can make use of Euler's totient function's properties to solve this problem. For a start, it is multiplicative, which in the context of number theory means that \(\phi(n m) = \phi(n) \phi(m)\) if \(n\) and \(m\) are coprime numbers. For example, \(\phi(6) = \phi(2) \phi(3) = 1 \cdot 2 = 2\), so \(6 / \phi(6) = 3\). Another thing we notice is that every number under a prime number \(p\) is relatively prime with \(p\), so \(\phi(p) = p-1\) and \(p / \phi(p) = 1 + \frac{1}{p}\).</p>
-			<p>But most importantly, we notice that when we multiply a number \(n\) by one of its prime factors \(p\), the resulting ration \(np / \phi(np)\) is the same as \(n / \phi(n)\). This is because there are \(\phi(n)\) numbers relatively prime to \(n p\) from \(1\) to \(p\); there are \(\phi(n)\) relatively prime numbers from \(p+1\) to \(2p\); and so on: there are \(\phi(n)\) relatively prime numbers in every interval \(kp+1\) to \((k+1) p\), and since there are \(p\) of these intervals, \( \phi(np) = \phi(n) p \), so \(np / \phi(np) = np / (\phi(n) p) = n / \phi(n)\). For example, \(\phi(6) = 2\), \(\phi(12) = 4\) and \(\phi(18) = 6\), and these three numbers have the same ratio \(n / \phi(n) = 3\).</p>
-			<p>Therefore, if we factorize a number \(n\), we don't care about the exponents over its prime factors, but just what prime factors it has. Since \(p / \phi(p) = 1 + \frac{1}{p}\) is greater than \(1\) but also decreases as \(p\) increases, we want this number \(n\) to have many prime factors and for these prime numbers to be small. If one of these factors is raised to some power different than \(1\), we are making \(n\) unnecessarily large and we might be loosing the chance to add more prime factors. Therefore, the ideal number would be one like \(2 \cdot 3 \cdot 5 \cdot 7\), the product of succesive prime numbers. These numbers are called the <i>primorials</i>. A list of the first primorials can be found in the OEIS as sequence <a href="https://oeis.org/A002110">A002110</a>.</p>
-			<p>We can see that \(2 \cdot 3 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot 17 = 510510\), while the next primordial is \(510510 \cdot 19 = 9699690\), which is greater than \(1000000\). Therefore, our answer is \(510510\), which has \(\phi(510510\) = 92160\) and \(510510/\phi(510510) = 510510/92160 \approx 5.5394\).</p>
+			<p>We can make use of Euler's totient function's properties to solve this problem. For a start, it is multiplicative, which in the context of number theory means that \(\phi(n m) = \phi(n) \phi(m)\) if \(n\) and \(m\) are coprime numbers. For example, \(\phi(6) = \phi(2) \phi(3) = 1 \cdot 2 = 2\), so \(6 / \phi(6) = 3\). Another thing we notice is that every number under a prime number \(p\) is relatively prime with \(p\), so \(\phi(p) = p-1\) and \(p / \phi(p) = 1 + \frac{1}{p-1}\).</p>
+			<p>But most importantly, we notice that when we multiply a number \(n\) by one of its prime factors \(p\), the resulting ration \(np / \phi(np)\) is the same as \(n / \phi(n)\). This is because there are \(\phi(n)\) numbers relatively prime to \(n p\) from \(1\) to \(n\); there are \(\phi(n)\) relatively prime numbers from \(n+1\) to \(2n\); and so on: there are \(\phi(n)\) relatively prime numbers in every interval \(kn+1\) to \((k+1) n\), and since there are \(p\) of these intervals, \( \phi(np) = \phi(n) p \), so \(np / \phi(np) = np / (\phi(n) p) = n / \phi(n)\). For example, \(\phi(6) = 2\), \(\phi(12) = 4\) and \(\phi(18) = 6\), and these three numbers have the same ratio \(n / \phi(n) = 3\).</p>
+			<p>Therefore, if we factorize a number \(n\), we don't care about the exponents over its prime factors, but just what prime factors it has. Since \(p / \phi(p) = 1 + \frac{1}{p-1}\) is greater than \(1\) but also decreases as \(p\) increases, we want this number \(n\) to have many prime factors and for these prime numbers to be small. If one of these factors is raised to some power different than \(1\), we are making \(n\) unnecessarily large and we might be loosing the chance to add more prime factors. Therefore, the ideal number would be one like \(2 \cdot 3 \cdot 5 \cdot 7\), the product of succesive prime numbers. These numbers are called the <i>primorials</i>. A list of the first primorials can be found in the OEIS as sequence <a href="https://oeis.org/A002110">A002110</a>.</p>
+			<p>We can see that \(2 \cdot 3 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot 17 = 510510\), while the next primorial is \(510510 \cdot 19 = 9699690\), which is greater than \(1000000\). Therefore, our answer is \(510510\), which has \(\phi(510510) = 92160\) and \(510510/\phi(510510) = 510510/92160 \approx 5.5394\).</p>
 			<p class="sign">- dino (2025/04/07)</p>
 		</details>
 	</div>
