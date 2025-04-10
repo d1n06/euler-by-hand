@@ -30,6 +30,7 @@
 			<li><a href="#problem-19">19.- Counting Sundays</a>
 			<li><a href="#problem-24">24.- Lexicographic Permutations</a>
 			<li><a href="#problem-25">25.- \(1000\)-digit Fibonacci Number</a>
+			<li><a href="#problem-28">28.- Number Spiral Diagonals</a>
 			<li><a href="#problem-40">40.- Champernowne's Constant</a>
 			<li><a href="#problem-69">69.- Totient Maximum</a>
 		</ul>
@@ -39,9 +40,9 @@
 		<h3 style="text-align: center">solving Project Euler problems by hand</h3>
 		<p>This site is an attempt to solve and explain the solution of as many <a href="https://projecteuler.net">Project Euler</a> problems using only math and possibly a calculator (but only for simple calculations) and sometimes the internet. Many Project Euler problems can be easily solved with simple computer programs, so let's do it the hard way!</p>
 		
-		<p>Yes, this defeats the entire purpose of Project Euler, since it's supposed to be about writing smart and fast computer programs, not whatever this is (wait till you see the sudoku one). Also, Publishing the solutions of problems beyond the first 100 problems isn't allowed, but I doubt I'll even make it that far.</p>
+		<p>Yes, this defeats the entire purpose of Project Euler, since it's supposed to be about writing smart and fast computer programs, not whatever this is (wait till you see the sudoku one). Also, sharing the solutions of problems beyond the first 100 problems isn't allowed, but I doubt I'll even make it that far.</p>
 		
-		<p>Number of projects solved so far: <b>12</b></p>
+		<p>Number of problems solved so far: <b>13</b></p>
 
 
 		<h2 id="problem-1"><a href="https://projecteuler.net/problem=1">1.- Multiples of 3 or 5</a></h2>
@@ -393,6 +394,65 @@
 			<p>hence our final answer is that the first term to contain \(1000\) digits is the \(4782\)<sup>th</sup> one.</p>
 			<p class="sign">- dino (2025/03/14)</p>
 		</details>
+		
+		<h2 id="problem-28"><a href="https://projecteuler.net/problem=28">28.- Number Spiral Diagonals</a></h2>
+		<p>Starting with the number \(1\) and moving to the right in a clockwise direction a \(5\) by \(5\) spiral is formed as follows:</p>
+		<p>\[ \begin{array}{ccccc}
+			{\color{red}21} & 22 & 23 & 24 & {\color{red}25} \\
+			20 & {\color{red}7} & 8 & {\color{red}9} & 10 \\
+			19 & 6 & {\color{red}1} & 2 & 11 \\
+			18 & {\color{red}5} & 4 & {\color{red}3} & 12 \\
+			{\color{red}17} & 16 & 15 & 14 & {\color{red}13}
+		\end{array} \]</p>
+		<p>It can be verified that the sum of the numbers on the diagonals is \(101\).</p>
+		<p>What is the sum of the numbers on the diagonals in a \(1001\) by \(1001\) spiral formed in the same way?</p>
+		
+		<details>
+			<summary>Solution</summary>	
+			<p>We can number each "layer" of the spiral with a number \(n\): the center \(1\) being layer \(0\), the \(3\) by \(3\) square being layer \(1\), the \(5\) by \(5\) square being layer \(2\) and so on...</p>
+			<p>\[ \begin{array}{ccccc}
+				{\color{red}1} & \qquad & \begin{array}{ccc}
+					{\color{red}7} & 8 & {\color{red}9} \\
+					6 &   & 2 \\
+					{\color{red}5} & 4 & {\color{red}3}
+				\end{array} & \qquad & \begin{array}{ccccc}
+					{\color{red}21} & 22 & 23 & 24 & {\color{red}25} \\
+					20 &    &    &    & 10 \\
+					19 &    &    &    & 11 \\
+					18 &    &    &    & 12 \\
+					{\color{red}17} & 16 & 15 & 14 & {\color{red}13}
+				\end{array} \\
+				n = 0 & & n = 1 & & n = 2
+			\end{array} \]</p>
+			<p>Except for the \(0\)<sup>th</sup> layer, every layer has \(8n\) numbers and has the following structure:</p>
+			<p>\[ \begin{array}{ccccc}
+				{\color{red}6n} & 6n+1 & 6n+2 & \cdots & {\color{red}8n} \\
+				\vdots & & & & 1 \\
+				4n+2 & & & & 2 \\
+				4n+1 & & & & \vdots \\
+				{\color{red}4n} & \cdots & 2n+2 & 2n+1 & {\color{red}2n}
+			\end{array} \]</p>
+			<p>We have written this structure starting at \(1\), but really each layer starts at a certain number \(s_n+1\) (it is more convenient to say that \(s_n\) is the end of the previous layer instead of the start of the \(n\)<sup>th</sup> layer). Therefore, the layers in the spiral can be constructed by adding \(s_n\) to each number in the pattern we have shown. Because of this, the corners of each layer are \(2n + s_n\), \(4n + s_n\), \(6n + s_n\) and \(8n + s_n\). In total, each layer adds \(2n + 4n + 6n + 8n + 4s_n = 20 n + 4 s_n\) to the total of the diagonal sum.</p>
+			
+			<p>Now, \(s_n\) is the number that the previous layer ends at, which is the "size" of all the layers that come before the \(n\)<sup>th</sup> layer. The side length of each layer is \(2n+1\), so the previous layer has side length \(2n-1\) and, since it forms a square, it has \((2n-1)^2\) numbers inside it, which will be our \(s_n\). We could have also seen that \(s_n = 1 + \sum_{k=1}^{n-1} 8k\). Therefore, the contribution of each layer (except the center one) to the total sum is</p>
+			<p>\[ 20 n + 4s_n = 20 n + 4 (2n-1)^2 = 20n + 16 n^2 - 16 n + 4 = 4 (4 n^2 + n + 1) \]</p>
+			<p>If we have a spiral with layers up to the \(N\)<sup>th</sup> layer, the sum of the diagonals of this spiral can be written as</p>
+			<p>\begin{align*}
+				1 + \sum_{n=1}^N 4 (4n^2 + n + 1) & = 1 + 16 \sum_{n=1}^N n^2 + 4 \sum_{n=1}^N n + 4 \sum_{n=1}^N 1 = \\
+				& = 1 + \tfrac{8}{3} N (N+1) (2N+1) + 2 N (N+1) + 4N = \\
+				& = \tfrac{1}{3} (16 N^3 + 30 N^2 + 26 N + 3)
+			\end{align*}</p>
+			<p>We see that our \(5\) by \(5\) spiral had layers from \(n=0\) to \(n=2\), so it had \(N=2\) and the sum of its diagonals was</p>
+			<p>\[ \tfrac{1}{3} (16 \cdot 2^3 + 30 \cdot 2^2 + 26 \cdot 2 + 3) = \tfrac{1}{3} (128 + 120 + 52 + 3) = \frac{303}{3} = 101 \]</p>
+			<p>which is what the statement says. Now, the \(1001\) by \(1001\) spiral has layers up to \(N=500\) (an \(L\) by \(L\) spiral will have \(N=\tfrac{1}{2} (L-1)\)). Therefore, its diagonals add up to</p>
+			<p>\begin{align*}
+				\tfrac{1}{3} (16 \cdot 500^3 & + 30 \cdot 500^2 + 26 \cdot 500 + 3) = \\
+				& = \tfrac{1}{3} (2000000000 + 7500000 + 13000 + 3) = \\
+				& = \frac{2007513003}{3} = 669171001
+			\end{align*}</p>
+			<p>which is our answer. We can also rewrite the polynomial as \(\tfrac{1}{6} (4 L^3 + 3L^2 + 8L - 9)\) after substituting with \(L = 2N+1\), and this new polynomial gives the same solution at \(L=1001\).</p>
+		</details>
+		
 		
 		<h2 id="problem-40"><a href="https://projecteuler.net/problem=40">40.- Champernowne's Constant</a></h2>
 		<p>An irrational decimal fraction is created by concatenating the positive integers:</p>
