@@ -32,6 +32,7 @@
 			<li><a href="#problem-25">25.- \(1000\)-digit Fibonacci Number</a>
 			<li><a href="#problem-28">28.- Number Spiral Diagonals</a>
 			<li><a href="#problem-40">40.- Champernowne's Constant</a>
+			<li><a href="#problem-63">63.- Powerful Digit Counts</a>
 			<li><a href="#problem-69">69.- Totient Maximum</a>
 		</ul>
 	</div>
@@ -42,7 +43,7 @@
 		
 		<p>Yes, this defeats the entire purpose of Project Euler, since it's supposed to be about writing smart and fast computer programs, not whatever this is (wait till you see the sudoku one). Also, sharing the solutions of problems beyond the first 100 problems isn't allowed, but I doubt I'll even make it that far.</p>
 		
-		<p>Number of problems solved so far: <b>13</b></p>
+		<p>Number of problems solved so far: <b>14</b></p>
 
 
 		<h2 id="problem-1"><a href="https://projecteuler.net/problem=1">1.- Multiples of 3 or 5</a></h2>
@@ -497,6 +498,34 @@
 			<p class="sign">- dino (2025/04/04)</p>
 		</details>
 		
+		<h2 id="problem-63"><a href="https://projecteuler.net/problem=63">63.- Powerful Digit Counts</a></h2>
+		<p>The \(5\)-digit number, \(16807=7^5\), is also a fifth power. Similarly, the \(9\)-digit number, \(134217728=8^9\), is a ninth power.</p>
+		<p>How many \(n\)-digit positive integers exist which are also an \(n\)<sup>th</sup> power?</p>
+
+		<details>
+			<summary>Solution</summary>
+			<p>It is clear that \(10^n\) is a one followed by \(n\) zeros, so it has \(n+1\) digits for any integer \(n\) and therefore cannot be an \(n\)<sup>th</sup> power with \(n\) digits. Also, for any base \(a \in \mathbb N\) with \(a \geq 10\), we will have \(a^n \geq 10^n\), so \(a^n\) will have \(n+1\) digits or more, so it won't work either. Therefore, we know that these numbers will be of the form \(a^n\) with \(a \le 10\).</p>
+			<p>It's easy to see that \(a^1\) has \(1\) digit for each \(a \le 10\), so the ten digits are trivially \(1\)-digit positive integers that are also "\(1\)<sup>st</sup> powers". Now, since \(a \le 10\), if \(a^n\) fails to be an \(n\)-digit number, it follows that \(a^{n+1} = a^n \cdot a\) will also fail to be an \(n+1\)-digit number and, in general, \(a^m\) won't be an \(m\)-digit number for any \(m \geq n\). Therefore, for each base \(a\), we just have to check when \(a^n\) fails to be an \(n\)-digit number and all powers below it will work for us.</p>
+
+			<p>For example, \(2^2 = 4\) is not a \(2\)-digit number, so we know that the only power with base \(2\) that we want is \(2^1\). The same thing happens with \(3\), since \(3^2 = 9\). However, \(4\) has that \(4^2 = 16\) is a \(2\)-digit number, but \(4^3 = 64\) doesn't have \(3\) digits. Checking all values for \(a\), we have</p>
+			<p>\[ \begin{array}{clc}
+				a & \text{First Fail} & \text{Total Powers} \\ \hline
+				1 & 1^2 = 1 & 1 \\
+				2 & 2^2 = 4 & 1 \\
+				3 & 3^2 = 9 & 1 \\
+				4 & 4^3 = 64 & 2 \\
+				5 & 5^4 = 625 & 3 \\
+				6 & 6^5 = 7776 & 4 \\
+				7 & 7^7 = 823543 & 6 \\
+				8 & 8^{11} = 8589934592 & 10 \\
+				9 & 9^{22} = 984770902183611232881 & 21
+			\end{array} \]</p>
+			<p>In total, we obtain \(49\) powers. We could think that some of these are repeats, but it's clear that, if we have two numbers of this form \(a^n\) and \(b^m\) with \(n\) and \(m\) different, they are different since they have different numbers of digits. If they do have \(n\) and \(m\) equal but \(a\) and \(b\) different, they will also be different since, for every positive integer \(n\), \(x^n\) is an injective function for \(x\) integer. Therefore, we have no repeats and \(49\) is our answer.</p>
+			<p class="sign">- dino (2025/07/05)</p>
+		</details>
+
+
+
 		<h2 id="problem-69"><a href="https://projecteuler.net/problem=69">69.- Totient Maximum</a></h2>
 		<p>Euler's totient function, \(\phi(n)\) [sometimes called the phi function], is defined as the number of positive integers not exceeding \(n\) which are relatively prime to \(n\). For example, as \(1\), \(2\), \(4\), \(5\), \(7\), and \(8\), are all less than or equal to nine and relatively prime to nine, \(\phi(9)=6\).</p>
 		<p>\[ \begin{array}{cccc}
