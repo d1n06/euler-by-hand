@@ -39,9 +39,9 @@
 	<div class="content">
 		<h1 style="text-align: center">Project Euler by hand</h1>
 		<h3 style="text-align: center">solving Project Euler problems by hand</h3>
-		<p>This site is an attempt to solve and explain the solution of as many <a href="https://projecteuler.net">Project Euler</a> problems using only math and possibly a calculator (but only for simple calculations) and sometimes the internet. Many Project Euler problems can be easily solved with simple computer programs, so let's do it the hard way!</p>
+		<p>This site is an attempt to solve and explain the solution of as many <a href="https://projecteuler.net">Project Euler</a> problems as possible using only math and possibly a calculator (but only for simple calculations) and sometimes the internet. Many Project Euler problems can be easily solved with simple computer programs, so let's do it the hard way!</p>
 		
-		<p>Yes, this defeats the entire purpose of Project Euler, since it's supposed to be about writing smart and fast computer programs, not whatever this is (wait till you see the sudoku one). Also, sharing the solutions of problems beyond the first 100 problems isn't allowed, but I doubt I'll even make it that far.</p>
+		<p>Yes, this defeats the entire purpose of Project Euler, since it's all supposed to be about writing smart and fast computer programs, not whatever this is (wait till you see the sudoku one). Also, sharing the solutions of problems beyond the first 100 problems isn't allowed, but I doubt I'll even make it that far.</p>
 		
 		<p>Number of problems solved so far: <b>14</b></p>
 
@@ -104,7 +104,7 @@
 			<p>The biggest product of two \(3\)-digit numbers is \(999 \cdot 999 = 998001\), so the best we can hope for is a \(6\)-digit number. Let's see that any \(6\)-digit palindromic number is a multiple of \(11\). If we write this number as \(\underline{abccba}\), where \(a,b,c \in \{0,1,\dots,9\}\) and the underlining means that this is the number's decimal representation, then,</p>
 			<p>\[ \underline{abccba} = 100001 a + 10010 b + 1100 c = 11 \cdot (9091 a + 910 b + 100 c), \]</p>
 			<p>so \(\underline{abccba}\) is a multiple of \(11\). Therefore, if \(x\) and \(y\) are the two \(3\)-digit numbers such that \(x y = \underline{abccba}\), we can assume that \(y\) is a multiple of \(11\).</p>
-			<p>The largest \(3\)-digit multiple of \(11\) is \(990 = 11*90\), but notice that its last digit is \(0\), so the first digit of \(xy\), which is \(a\), will also be \(0\). We don't want this, since this will mean that the most significant digit of our palindromic number will be \(0\) and it will be small. It won't even be a \(6\)-digit number.</p>
+			<p>The largest \(3\)-digit multiple of \(11\) is \(990 = 11 \cdot 90\), but notice that its last digit is \(0\), so the first digit of \(xy\), which is \(a\), will also be \(0\). We don't want this, since this will mean that the most significant digit of our palindromic number will be \(0\) and it will be small. It won't even be a \(6\)-digit number.</p>
 			<p>Let's be greedy and try to look for a \(6\)-digit palindromic number with \(a = 9\). So, if \(y = 990\) isn't good, let's try the previous multiple of \(11\), which is \(y = 11 \cdot 89 = 979\). Since its last digit is \(9\), we want the last digit of \(x\) to be \(1\) so we get \(a = 9\). Then, we have \(90\) possible choices for the value of \(x\), from \(101\) to \(991\). However, we notice that \(911 \cdot 979 = 891869\) and \(921 \cdot 979 = 901659\), so our only choices for \(x\) are \(921,931,941,951,961,971,981\) and \(991\), since anything smaller than \(x = 921\) won't make \(xy\) have \(9\) at it's first digit. Let's check all these values for palindromic numbers:</p>
 			<p>\begin{array}{c|c}
 				x & x y = 979 x \\ \hline
@@ -198,7 +198,7 @@
 			<p>\[ (a,b,c) = (d (m^2-n^2),2 d m n, d (m^2+n^2)) \]</p>
 			for some \(d,m,n \in \mathbb N\) with \(m > n\). If we assume that \(d\), \(m\) and \(n\) are such numbers (we dont't know if \(d (m^2-n^2)\) corresponds to \(a\) or \(b\), but we do know that \(c = d (m^2+n^2) \)), we have that</p>
 			<p>\[ a+b+c = d(m^2-n^2) + 2 dmn + d(m^2 + n^2) = 2 d m^2 + 2 d m n = 1000 \Longrightarrow d m(m + n) = 500 \]</p>
-			<p>We can write \(d m (m+n) = 500 = 2^2 \cdot 5^3\). This number doesn't have many divisors, only twelve, so we can check them one by one. All the possible divisors of \(500\) and therefore values of \(d\) and \(m\) are \(1, 2, 4, 5, 10, 20, 25, 50, 100, 125, 250, 500\). Some combinations of \(d\) and \(m\) with these values are not valid, since \(d m\) would stop being a divisor of \(500\). For example, \(d = 20\) and \(m = 2\) would give \(dm = 40\), which is not a divior of \(500\). Checking all the valid choices of \(d\) and \(m\), we obtain the corresponding values of \(n = 500/(dm) - m\):</p>
+			<p>We can write \(d m (m+n) = 500 = 2^2 \cdot 5^3\). This number doesn't have many divisors, only twelve, so we can check them one by one. All the possible divisors of \(500\) and therefore values of \(d\) and \(m\) are \(1, 2, 4, 5, 10, 20, 25, 50, 100, 125, 250, 500\). Some combinations of \(d\) and \(m\) with these values are not valid, since \(d m\) would stop being a divisor of \(500\). For example, \(d = 20\) and \(m = 2\) would give \(dm = 40\), which is not a divisor of \(500\). Checking all the valid choices of \(d\) and \(m\), we obtain the corresponding values of \(n = 500/(dm) - m\):</p>
 			<p>\begin{array}{r|cccccccccccc}
 				 & 1 & 2 & 4 & 5 & 10 & 20 & 25 & 50 & 100 & 125 & 250 & 500 \\ \hline
 				1 & 499 & 248 & 121 & 95 & 40 & \textcolor{red}{5} & -5 & -40 & -195 & -121 & -248 & -499 \\
@@ -218,7 +218,7 @@
 			<p>\[ a = d (m^2-n^2) = 1 \cdot (20^2-5^2) = 375, \quad b = 2 d m n = 2 \cdot 1 \cdot 20 \cdot 5 = 200, \quad c = d (m^2 + n^2) = 1 \cdot(20^2 + 5^2) = 425, \] </p>
 			<p>and if \(d=25\), \(m=4\) and \(n=1\), we have</p>
 			<p>\[ a = d (m^2-n^2) = 25 \cdot (4^2-1^2) = 375, \quad b = 2 d m n = 2 \cdot 25 \cdot 4 \cdot 1 = 200, \quad c = d (m^2 + n^2) = 25 \cdot(4^2 + 1^2) = 425 \] </p>
-			<p>These three numbers clearly have \(a+b+c = 500\) and \(a^2 + b^2 = 180625 = c^2 \). Therefore, our answer is</p>
+			<p>These three numbers clearly have \(a+b+c = 1000\) and \(a^2 + b^2 = 180625 = c^2 \). Therefore, our answer is</p>
 			<p>\[ a b c = 375 \cdot 200 \cdot 425 = 31875000 \]</p>
 			<p class="sign">- dino (2025/03/14)</p>
 		</details>
@@ -232,7 +232,7 @@
 			<summary>Solution</summary>	
 			In a \(n \times n\) grid, to go to from the top left corner to the bottom right corner, we must always move \(n\) steps to the right and \(n\) steps down according to the constraints of this problem. Therefore, a path depeds only on which order we take these steps. For example, in the image, the top left path follows the ordering <i>right right down down</i> and the bottom middle path follows <i>down right down right</i>.</p>
 			
-			<p>For each possible ordering of these steps there is one path; and for each possible path there is one order. Choosing a path and choosing an ordering is equivalent. Therefore the number of possible routes on a \(n \times n\) grid is the number of possible orders to be chosen. In this choice, we must choose to place \(n\) steps down and \(n\) steps right in a sequence of \(2n\) steps, so this number of choices is given by the combination formula \( \binom{2n}{n} = \frac{(2n)!}{n! n!} \). Therefore, we have that the number of possible routes in a \(20 \times 20\) grid is</p>
+			<p>For each possible ordering of these steps there is one path; and for each possible path there is one order. Choosing a path and choosing an ordering is equivalent. Therefore the number of possible routes on a \(n \times n\) grid is the number of possible orders to be chosen. In this choice, we must choose to place \(n\) steps down and \(n\) steps right in a sequence of \(2n\) steps, so this number of choices is given by the combination formula \( \binom{2n}{n} = \frac{(2n)!}{n! n!} \). On a \(2 \times 2\) grid, there will be \(\binom42 = \frac{4!}{2! 2!} = \frac{24}{2 \cdot 2} = 6 \) routes, as the problem statement shows. Therefore, we have that the number of possible routes on a \(20 \times 20\) grid is</p>
 			<p>\[ \binom{40}{20} = \frac{40!}{20! 20!} = \frac{21 \cdot 22 \cdot \cdots \cdot 40}{1 \cdot 2 \cdot \cdots \cdot 20} = 137846528820 \]</p>
 			<p>and this is our final answer.</p>
 			<p class="sign">- dino (2025/03/11)</p>
@@ -318,16 +318,16 @@
 			1932 & \text{Yes} & F & 1 \\
 			\end{array} \]</p>
 			<p>Maybe it's taken a bit long, but notice that 1929 started on a Tuesday and came after a leap year. This would have been the same thing that would have happened on 1901 if 1900 had been a leap year, but it wasn't cause it was a multiple of 100 and not of 400. Regardless, 1091 and 1929 behaved the exact same and had the same position in the "No, No, No, Yes" pattern of leap years. Because there were no more exceptions of leap years in the 20th century like there were in 1900, this pattern of 28 years between 1901 and 1928 starts again on 1929.</p>
-			<p>This pattern went on from 1901 to 1928; from 1929 to 1956; from 1957 to 1984; and from 1985 to 2012 (2000 was a leap year). Therefore, adding up the Sundays on the table from 1901 to 1928, we get \(48\) Sundays in each cycle, so a total of \(48*3 = 144\) Sundays from 1901 to 1984. We also know that the sixteen years from 1985 to 2000 were identical to the years from 1901 to 1916, so adding up the Sundays from 1901 to 1916 we get \(27\) Sundays from 1985 to 2000.</p>
+			<p>This pattern went on from 1901 to 1928; from 1929 to 1956; from 1957 to 1984; and from 1985 to 2012 (2000 was a leap year). Therefore, adding up the Sundays on the table from 1901 to 1928, we get \(48\) Sundays in each cycle, so a total of \(48 \cdot 3 = 144\) Sundays from 1901 to 1984. We also know that the sixteen years from 1985 to 2000 were identical to the years from 1901 to 1916, so adding up the Sundays from 1901 to 1916 we get \(27\) Sundays from 1985 to 2000.</p>
 			
 			<p>In total, there were \(144 + 27 = 171\) Sundays from 1901 to 2000, which is our final answer.</p>
 			<p class="sign">- dino (2025/04/04)</p>
 		</details>
 		
 		<h2 id="problem-24"><a href="https://projecteuler.net/problem=24">24.- Lexicographic Permutations</a></h2>
-		<p>A permutation is an ordered arrangement of objects. For example, 3124 is one possible permutation of the digits 1, 2, 3 and 4. If all of the permutations are listed numerically or alphabetically, we call it lexicographic order. The lexicographic permutations of 0, 1 and 2 are:</p>
-		<p style="text-align: center">012   021   102   120   201   210</p>
-		<p>What is the millionth lexicographic permutation of the digits 0, 1, 2, 3, 4, 5, 6, 7, 8 and 9?</p>
+		<p>A permutation is an ordered arrangement of objects. For example, \(3124\) is one possible permutation of the digits \(1\), \(2\), \(3\) and \(4\). If all of the permutations are listed numerically or alphabetically, we call it lexicographic order. The lexicographic permutations of \(0\), \(1\) and \(2\) are:</p>
+		<p>\[ 012 \quad 021 \quad 102 \quad 120 \quad 201 \quad 210 \]</p>
+		<p>What is the millionth lexicographic permutation of the digits \(0\), \(1\), \(2\), \(3\), \(4\), \(5\), \(6\), \(7\), \(8\) and \(9\)?</p>
 		
 		<details>
 			<summary>Solution</summary>	
@@ -361,7 +361,7 @@
 		<h2 id="problem-25"><a href="https://projecteuler.net/problem=25">25.- \(1000\)-digit Fibonacci Number</a></h2>
 		<p>The Fibonacci sequence is defined by the recurrence relation:</p>
 		<blockquote>\(F_n = F_{n-1} + F_{n-2}\) where \(F_1 = 1\) and \(F_2 = 1\).</blockquote>
-		<p>Hence the first 12 terms will be:</p>
+		<p>Hence the first \(12\) terms will be:</p>
 		<p>\[F_1 = 1\]</p>
 		<p>\[F_2 = 1\]</p>
 		<p>\[F_3 = 2\]</p>
@@ -504,8 +504,8 @@
 
 		<details>
 			<summary>Solution</summary>
-			<p>It is clear that \(10^n\) is a one followed by \(n\) zeros, so it has \(n+1\) digits for any integer \(n\) and therefore cannot be an \(n\)<sup>th</sup> power with \(n\) digits. Also, for any base \(a \in \mathbb N\) with \(a \geq 10\), we will have \(a^n \geq 10^n\), so \(a^n\) will have \(n+1\) digits or more, so it won't work either. Therefore, we know that these numbers will be of the form \(a^n\) with \(a \le 10\).</p>
-			<p>It's easy to see that \(a^1\) has \(1\) digit for each \(a \le 10\), so the ten digits are trivially \(1\)-digit positive integers that are also "\(1\)<sup>st</sup> powers". Now, since \(a \le 10\), if \(a^n\) fails to be an \(n\)-digit number, it follows that \(a^{n+1} = a^n \cdot a\) will also fail to be an \(n+1\)-digit number and, in general, \(a^m\) won't be an \(m\)-digit number for any \(m \geq n\). Therefore, for each base \(a\), we just have to check when \(a^n\) fails to be an \(n\)-digit number and all powers below it will work for us.</p>
+			<p>It is clear that \(10^n\) is a one followed by \(n\) zeros, so it has \(n+1\) digits for any integer \(n\) and therefore cannot be an \(n\)<sup>th</sup> power with \(n\) digits. Also, for any base \(a \in \mathbb N\) with \(a \geq 10\), we will have \(a^n \geq 10^n\), so \(a^n\) will have \(n+1\) digits or more, so it won't work either. Therefore, we know that these numbers will be of the form \(a^n\) with \(a < 10\).</p>
+			<p>It's easy to see that \(a^1\) has \(1\) digit for each \(a < 10\), so the ten digits are trivially \(1\)-digit positive integers that are also "\(1\)<sup>st</sup> powers". Now, since \(a < 10\), if \(a^n\) fails to be an \(n\)-digit number, it follows that \(a^{n+1} = a^n \cdot a\) will also fail to be an \(n+1\)-digit number and, in general, \(a^m\) won't be an \(m\)-digit number for any \(m \geq n\). Therefore, for each base \(a\), we just have to check when \(a^n\) fails to be an \(n\)-digit number and all powers below it will work for us.</p>
 
 			<p>For example, \(2^2 = 4\) is not a \(2\)-digit number, so we know that the only power with base \(2\) that we want is \(2^1\). The same thing happens with \(3\), since \(3^2 = 9\). However, \(4\) has that \(4^2 = 16\) is a \(2\)-digit number, but \(4^3 = 64\) doesn't have \(3\) digits. Checking all values for \(a\), we have</p>
 			<p>\[ \begin{array}{clc}
