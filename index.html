@@ -34,6 +34,7 @@
 			<li><a href="#problem-24">24.- Lexicographic Permutations</a>
 			<li><a href="#problem-25">25.- \(1000\)-digit Fibonacci Number</a>
 			<li><a href="#problem-28">28.- Number Spiral Diagonals</a>
+			<li><a href="#problem-33">33.- Digit Cancelling Fractions</a>
 			<li><a href="#problem-40">40.- Champernowne's Constant</a>
 			<li><a href="#problem-57">57.- Square Root Convergents</a>
 			<li><a href="#problem-63">63.- Powerful Digit Counts</a>
@@ -47,7 +48,7 @@
 		
 		<p>Yes, this defeats the entire purpose of Project Euler, since it's all supposed to be about writing smart and fast computer programs, not whatever this is (wait till you see the sudoku one). Also, sharing the solutions of problems beyond the first 100 problems isn't allowed, but I doubt I'll even make it that far.</p>
 		
-		<p>Number of problems solved so far: <b>15</b></p>
+		<p>Number of problems solved so far: <b>16</b></p>
 
 
 		<h2 id="problem-1"><a href="https://projecteuler.net/problem=1">1.- Multiples of 3 or 5</a></h2>
@@ -458,8 +459,80 @@
 			<p>which is our answer. We can also rewrite the polynomial as \(\tfrac{1}{6} (4 L^3 + 3L^2 + 8L - 9)\) after substituting with \(L = 2N+1\), and this new polynomial gives the same solution at \(L=1001\).</p>
 			<p class="sign">- dino (2025/04/10)</p>
 		</details>
+
+		<h2 id="problem-33"><a href="https://projecteuler.net/problem=33">33.- Digit Cancelling Fractions</a></h2>
+		<p>The fraction \(49/98\) is a curious fraction, as an inexperienced mathematician in attempting to simplify it may incorrectly believe that \(49/98 = 4/8\), which is correct, is obtained by cancelling the \(9\)s.</p>
+		<p>We shall consider fractions like, \(30/50 = 3/5\), to be trivial examples.</p>
+		<p>There are exactly four non-trivial examples of this type of fraction, less than one in value, and containing two digits in the numerator and denominator.</p>
+		<p>If the product of these four fractions is given in its lowest common terms, find the value of the denominator.</p>
+
+		<details>
+			<summary>Solution</summary>
+			<p>The problem statement seems to imply that fractions like \(\frac{11}{22}=\frac12\) are not trivial, but this is clearly not the case, since there are more than four of these. In fact, let's see that all these non-trivial fractions are of the form \(\frac{10a + c}{10c + b} = \frac{a}{b}\).</p>
+
+			<p>If they were of the form \(\frac{10a + c}{10b + c} = \frac{a}{b}\), we would have that</p>
+			<p>\[ (10a + c) b = (10b+c) a \Longrightarrow 10ab + bc = 10ab + ac \Longrightarrow bc = ac. \]</p>
+			<p>If \(c=0\), then the fraction would be of the form \(\frac{10a}{10b} = \frac{a}{b}\), which we already know is a trivial solution. If \(c \neq 0\), then we will have that \(a=b\) and the fraction is of the form \(\frac{10a+c}{10a+c} = \frac{a}{a}\), of which there are more than four of, like \(\frac{32}{32}=\frac{3}{3}\).</p>
+
+			<p>On the other hand, if the fraction is of the form \(\frac{10c+a}{10c+b} = \frac{a}{b}\), then we will have</p>
+			<p>\[ (10c+a)b = (10c+b)a \Longrightarrow 10bc + ab = 10ac + ab \Longrightarrow bc = ac. \]</p>
+			<p>In this form, \(c\) cannot be zero, so this implies \(a = b\) and we arrive at a fraction like \(\frac{10c+a}{10c+a} = \frac{a}{a}\), which is again trivial by the same reasoning.</p>
+
+			<p>Therefore, indeed the only non-trivial fractions are of the form \(\frac{10a + c}{10c + b} = \frac{a}{b}\). In this case, we have</p>
+			<p>\[ (10a+c)b = (10c+b)a \Longrightarrow 10ab +bc = 10ac + ab \Longrightarrow 9ab + bc = 10ac \Longrightarrow (9a + c) b = 10 ac. \]<p>
 		
-		
+			<p>Now, this means that \(9a+c\) divides \(10ac\), so if we fix the values of \(a\) and \(c\), we can check if this is the case and find the corresponding value of \(b\), which would give us a non-trivial solution. \(a\) and \(c\) can only take values from \(1\) to \(9\), which means there are only \(81\) combinations to check, enough to try by hand.</p>
+
+			<p>Before doing so, let's eliminate some of these combinations by using modular arithmetic. The previous equation \((9a+c) b = 10ac\) means \((9a+c) b \equiv b (c - a) \equiv 0 \pmod{10}\). If \(c-a\) was coprime with \(10\), that is, if it was congruent with \(1, 3, 7\) or \(9\), then we could "divide" by \(c-a\) and find that \(b \equiv 0 \pmod{10}\). This implies that \(b=0\), but this cannot be, since then \(\frac{a}{b}\) would be undefined. Threfore, we can ignore the combinations of \(a\) and \(c\) such that \(c-a\) is coprime with \(10\). Here is a table of these combinations after having marked these:</p>
+			<p>\[ \begin{array}{cc|cccccccc}
+				b &  &   &   &   &   & a &   &   &   &   \\
+				& & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
+				&1& \times & \times & & \times &  &  &  & \times &  \\ 
+				&2& \times & \times & \times & & \times &  &  &  & \times \\ 
+				&3&  & \times & \times & \times & & \times &  &  & \\ 
+				&4& \times &  & \times & \times & \times & & \times &  &  \\ 
+				c&5&  & \times &  & \times & \times & \times & & \times &  \\ 
+				&6&  &  & \times &  & \times & \times & \times & & \times \\ 
+				&7&  &  &  & \times &  & \times & \times & \times & \\ 
+				&8& \times &  &  &  & \times &  & \times & \times & \times \\ 
+				&9&  & \times &  & 8 &  & \times &  & \times & \times \\ 
+			\end{array} \]</p>
+			<p>We have also marked \(b=8\) at \(a=5\) and \(c=9\) like the problem statement says and crossed out all the cells with \(a=c\), since this implies</p>
+			<p>\[ b = \frac{10ac}{9a+c} = \frac{10a^2}{10a} = a, \]</p>
+			<p>and this means that the fraction is of the form \(\frac{10a+a}{10a+a} = \frac{a}{a}\), which is a trivial solution.</p>
+			
+			<p>According to the statement, there's only \(3\) more cells in this table that will be valid, so let's try to find those, starting at \(a=1\) and \(c=3\). We have that</p>
+			<p>\[ b = \frac{10ac}{9a+c} = \frac{10 \cdot 1 \cdot 3}{9+3} = \frac{30}{12}. \]</p>
+			<p>It's clear that \(13\) does not divide \(30\), so we cross out this cell. The same thing happens at \(a=1\) and \(c=5\) since \(9a+c = 14\) does not divide \(10ac=50\). However, at \(a=1\) and \(c=6\), we find \(9a+c = 15\) and \(10ac=60\), so \(b=\frac{60}{15} = 4\). Therefore, \(\frac{16}{64} = \frac{1}{4}\) is a non-trivial solution.</p>
+
+			<p>Let's keep looking at the following cells:</p>
+			<p>\[ \begin{align*}
+				& a=1, c=7 \Longrightarrow b = \frac{10 \cdot 1 \cdot 7}{9 \cdot 1 + 7} = \frac{70}{16} \notin \mathbb Z, \\
+				& a=1, c=9 \Longrightarrow b = \frac{10 \cdot 1 \cdot 9}{9 \cdot 1 + 9} = \frac{90}{18} = 5, \\
+				& a=2, c=4 \Longrightarrow b = \frac{10 \cdot 2 \cdot 4}{9 \cdot 2 + 4} = \frac{80}{22} \notin \mathbb Z, \\
+				& a=2, c=6 \Longrightarrow b = \frac{10 \cdot 2 \cdot 6}{9 \cdot 2 + 6} = \frac{120}{24} = 5.
+			\end{align*} \]</p>
+			
+			<p>We have found another two non-trivial fractions: \(\frac{19}{95} = \frac{1}{5}\) and \(\frac{26}{65} = \frac{2}{5}\). If the statement is correct, then these are all the non-trivial solutions.</p>
+			<p>\[ \begin{array}{cc|cccccccc}
+				b &  &   &   &   &   & a &   &   &   &   \\
+				& & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 \\ \hline
+				&1& \times & \times & & \times &  &  &  & \times &  \\ 
+				&2& \times & \times & \times & & \times &  &  &  & \times \\ 
+				&3& \times & \times & \times & \times & & \times &  &  & \\ 
+				&4& \times & \times & \times & \times & \times & & \times &  &  \\ 
+				c&5& \times & \times &  & \times & \times & \times & & \times &  \\ 
+				&6& 4 & 5 & \times &  & \times & \times & \times & & \times \\ 
+				&7& \times &  &  & \times &  & \times & \times & \times & \\ 
+				&8& \times &  &  &  & \times &  & \times & \times & \times \\ 
+				&9& 5 & \times &  & 8 &  & \times &  & \times & \times \\ 
+			\end{array} \]</p>
+			<p>Therefore, our product of these four fractions is</p>
+			<p>\[ \frac{16}{64} \cdot \frac{19}{95} \cdot \frac{26}{65} \cdot \frac{49}{98} = \frac{1}{4} \cdot \frac{1}{5} \cdot \frac{2}{5} \cdot \frac{4}{8} = \frac{2}{200} = \frac{1}{100}, \]</p>
+			<p>and our final solution is \(100\).</p>
+			<p class="sign">- dino (2026/01/17)</p>
+		</details>
+			
 		<h2 id="problem-40"><a href="https://projecteuler.net/problem=40">40.- Champernowne's Constant</a></h2>
 		<p>An irratioal decimal fraction is created by concatenating the positive integers:</p>
 		<p>\[0.12345678910{\color{red}\mathbf 1}112131415161718192021\cdots\]</p>
