@@ -747,6 +747,8 @@
 				938 & 943 & 951 & 956 & 964 & 972 & 977 & 985 \\
 				990 & 998	
 			\end{array} \]</p>
+
+			<p>Now, the previous statement is not completely true. It holds for the first values of \(t\), but as \(t\) and \(m\) increase, the errors in our approximations also increase and, eventually, our formula will break. These values of \(n\) for which \(x_n\) has more digits in the numerator than in the denominator make up the OEIS sequence <a href="https://oeis.org/A273980">A273980</a>, which refers to the Project Euler problem and gives a bit more insight into the properties of the sequence.</p>
 			
 			<p class="sign">- dino (2026/01/16)</p>
 		</details>
@@ -759,7 +761,7 @@
 
 		<details>
 			<summary>Solution</summary>
-			<p>It is clear that \(10^n\) is a one followed by \(n\) zeros, so it has \(n+1\) digits for any integer \(n\) and therefore cannot be an \(n\)<sup>th</sup> power with \(n\) digits. Also, for any base \(a \in \mathbb N\) with \(a \geq 10\), we will have \(a^n \geq 10^n\), so \(a^n\) will have \(n+1\) digits or more, so it won't work either. Therefore, we know that these numbers will be of the form \(a^n\) with \(a < 10\).</p>
+			<p>It is clear that \(10^n\) is a one followed by \(n\) zeros, so it has \(n+1\) digits for any integer \(n\) and therefore cannot be an \(n\)<sup>th</sup> power with \(n\) digits. Also, for any base \(a \in \mathbb N\) with \(a \geq 10\), we will have \(a^n \geq 10^n\), so \(a^n\) will have \(n+1\) digits or more, so it won't work either. Therefore, we know that these numbers will be of the form \(a^n\) with \(a \lt 10\).</p>
 			<p>It's easy to see that \(a^1\) has \(1\) digit for each \(a \lt 10\), so the ten digits are trivially \(1\)-digit positive integers that are also "\(1\)<sup>st</sup> powers". Now, since \(a \lt 10\), if \(a^n\) fails to be an \(n\)-digit number, it follows that \(a^{n+1} = a^n \cdot a\) will also fail to be an \(n+1\)-digit number and, in general, \(a^m\) won't be an \(m\)-digit number for any \(m \geq n\). Therefore, for each base \(a\), we just have to check when \(a^n\) fails to be an \(n\)-digit number and all powers below it will work for us.</p>
 
 			<p>For example, \(2^2 = 4\) is not a \(2\)-digit number, so we know that the only power with base \(2\) that we want is \(2^1\). The same thing happens with \(3\), since \(3^2 = 9\). However, \(4\) has that \(4^2 = 16\) is a \(2\)-digit number, but \(4^3 = 64\) doesn't have \(3\) digits. Checking all values for \(a\), we have</p>
