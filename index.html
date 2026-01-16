@@ -32,6 +32,7 @@
 			<li><a href="#problem-25">25.- \(1000\)-digit Fibonacci Number</a>
 			<li><a href="#problem-28">28.- Number Spiral Diagonals</a>
 			<li><a href="#problem-40">40.- Champernowne's Constant</a>
+			<li><a href="#problem-57">57.- Square Root Convergents</a>
 			<li><a href="#problem-63">63.- Powerful Digit Counts</a>
 			<li><a href="#problem-69">69.- Totient Maximum</a>
 		</ul>
@@ -43,7 +44,7 @@
 		
 		<p>Yes, this defeats the entire purpose of Project Euler, since it's all supposed to be about writing smart and fast computer programs, not whatever this is (wait till you see the sudoku one). Also, sharing the solutions of problems beyond the first 100 problems isn't allowed, but I doubt I'll even make it that far.</p>
 		
-		<p>Number of problems solved so far: <b>14</b></p>
+		<p>Number of problems solved so far: <b>15</b></p>
 
 
 		<h2 id="problem-1"><a href="https://projecteuler.net/problem=1">1.- Multiples of 3 or 5</a></h2>
@@ -144,7 +145,7 @@
 			<p>That is, we take the highest exponent of each prime number in the factorizations of \(a_1,a_2,\dots,a_m\). The greatest common divisor follows a similar formula, where we take the lowest exponents instead. Therefore, we need to factorize the numbers from \(1\) to \(20\) and find these largest exponents. In the following table, each row represents a prime number and each cell represents the exponent of that prime number found in the factorization of the column's number. We've left a blank cell instead of writing zeroes. At the right, we have the largest exponent of each row. </p>
 			<p>\[ \begin{array}{r|cccccccccccccccccccc|c}
 				  & 1 & 2 & 3 & 4 & 5 & 6 & 7 & 8 & 9 & 10 & 11 & 12 & 13 & 14 & 15 & 16 & 17 & 18 & 19 & 20 & \\ \hline
-				2 &   & 1 &   & 2 &   & 1 &   & 3 &   & 1  &    & 2  &    & 1  &    & 4  &    & 1  &    & 1  & 4 \\
+				2 &   & 1 &   & 2 &   & 1 &   & 3 &   & 1  &    & 2  &    & 1  &    & 4  &    & 1  &    & 2  & 4 \\
 				3 &   &   & 1 &   &   & 1 &   &   & 2 &    &    & 1  &    &    & 1  &    &    & 2  &    &    & 2 \\
 				5 &   &   &   &   & 1 &   &   &   &   & 1  &    &    &    &    & 1  &    &    &    &    & 1  & 1 \\
 				7 &   &   &   &   &   &   & 1 &   &   &    &    &    &    & 1  &    &    &    &    &    &    & 1 \\
@@ -230,7 +231,7 @@
 		
 		<details>
 			<summary>Solution</summary>	
-			In a \(n \times n\) grid, to go to from the top left corner to the bottom right corner, we must always move \(n\) steps to the right and \(n\) steps down according to the constraints of this problem. Therefore, a path depeds only on which order we take these steps. For example, in the image, the top left path follows the ordering <i>right right down down</i> and the bottom middle path follows <i>down right down right</i>.</p>
+			In a \(n \times n\) grid, to go to from the top left corner to the bottom right corner, we must always move \(n\) steps to the right and \(n\) steps down according to the constraints of this problem. Therefore, a path depends only on which order we take these steps. For example, in the image, the top left path follows the ordering <i>right right down down</i> and the bottom middle path follows <i>down right down right</i>.</p>
 			
 			<p>For each possible ordering of these steps there is one path; and for each possible path there is one order. Choosing a path and choosing an ordering is equivalent. Therefore the number of possible routes on a \(n \times n\) grid is the number of possible orders to be chosen. In this choice, we must choose to place \(n\) steps down and \(n\) steps right in a sequence of \(2n\) steps, so this number of choices is given by the combination formula \( \binom{2n}{n} = \frac{(2n)!}{n! n!} \). On a \(2 \times 2\) grid, there will be \(\binom42 = \frac{4!}{2! 2!} = \frac{24}{2 \cdot 2} = 6 \) routes, as the problem statement shows. Therefore, we have that the number of possible routes on a \(20 \times 20\) grid is</p>
 			<p>\[ \binom{40}{20} = \frac{40!}{20! 20!} = \frac{21 \cdot 22 \cdot \cdots \cdot 40}{1 \cdot 2 \cdot \cdots \cdot 20} = 137846528820 \]</p>
@@ -335,8 +336,8 @@
 			<p>Considering that the permutations start at the \(0\)<sup>th</sup> place, we have to find the \(999999\)<sup>th</sup> permutation. We can find the representation of this permutation using the following algorithm:</p>
 			<ul>
 				<li> To find the first digit of the \(m\)<sup>th</sup> permutation, write \(m = a \cdot (n-1)! + b \) with \(a,b \in \mathbb N\) and \(b < (n-1)!\). The first digit of the permutation will be \(a\).
-				<li> Cross out \(a\) off your list of reminding digits.
-				<li> The second digit of the \(m\)<sup>th</sup> permutation will be the first digit of the \(b\)<sup>th</sup> permutation of the reminding digits. In fact, the rest of the permutation you haven't found is the \(b\)<sup>th</sup> permutation of the reminding digits.
+				<li> Cross out \(a\) off your list of remaining digits.
+				<li> The second digit of the \(m\)<sup>th</sup> permutation will be the first digit of the \(b\)<sup>th</sup> permutation of the remaining digits. In fact, the rest of the permutation you haven't found is the \(b\)<sup>th</sup> permutation of the reminding digits.
 				<li> Repeat until you've found all digits.
 			</ul>
 			<p>For example, to find the third, permutation of the digits \(0\), \(1\) and \(2\), we write \(2 = 1 \cdot (3-1)! + 0 \) (remember, we use \(2\) instead of \(3\) because we start at the \(0\)<sup>th</sup> permutation). Then, the first digit of our permutation will be \(1\). The second digit will be the first digit of the \(0\)<sup>th</sup> permutation of \(0\) and \(2\), so we write \(0 = 0 \cdot (2-1)! + 0\) and the second digit is \(0\). The only remaining digit is \(2\), which is also the \(0\)<sup>th</sup> permutation of the digit \(2\). Therefore, the third permutation of \(0\), \(1\) and \(2\) is \(102\), as we see in the problem statement.</p>
@@ -457,7 +458,7 @@
 		
 		
 		<h2 id="problem-40"><a href="https://projecteuler.net/problem=40">40.- Champernowne's Constant</a></h2>
-		<p>An irrational decimal fraction is created by concatenating the positive integers:</p>
+		<p>An irratioal decimal fraction is created by concatenating the positive integers:</p>
 		<p>\[0.12345678910{\color{red}\mathbf 1}112131415161718192021\cdots\]</p>
 		<p>It can be seen that the \(12\)<sup>th</sup> digit of the fractional part is \(1\).</p>
 		<p>If \(d_n\) represents the \(n\)<sup>th</sup> digit of the fractional part, find the value of the following expression.
@@ -497,15 +498,266 @@
 			<p>Therefore, our solution is \(1 \cdot 1 \cdot 5 \cdot 3 \cdot 7 \cdot 2 \cdot 1 = 210\).</p>
 			<p class="sign">- dino (2025/04/04)</p>
 		</details>
-		
+
+		<h2 id="problem-57"><a href="https://projecteuler.net/problem=57">57.- Square Root Convergents</a></h2>
+		<p>It is possible to show that the square root of two can be expressed as an infinite continued fraction.</p>
+		<p>\[ \sqrt 2 =1+ \frac 1 {2+ \frac 1 {2 +\frac 1 {2+ \dots}}} \]</p>
+		<p>By expanding this for the first four iterations, we get:</p>
+		<p>\[ 1 + \frac 1 2 = \frac  32 = 1.5 \]</p>
+		<p>\[ 1 + \frac 1 {2 + \frac 1 2} = \frac 7 5 = 1.4 \]</p>
+		<p>\[ 1 + \frac 1 {2 + \frac 1 {2+\frac 1 2}} = \frac {17}{12} = 1.41666 \dots \]</p>
+		<p>\[ 1 + \frac 1 {2 + \frac 1 {2+\frac 1 {2+\frac 1 2}}} = \frac {41}{29} = 1.41379 \dots \]</p>
+		<p>The next three expansions are \(\frac {99}{70}\), \(\frac {239}{169}\), and \(\frac {577}{408}\), but the eighth expansion, \(\frac {1393}{985}\), is the first example where the number of digits in the numerator exceeds the number of digits in the denominator.</p>
+		<p>In the first one-thousand expansions, how many fractions contain a numerator with more digits than the denominator?</p>
+
+		<details>
+			<summary>Solution</summary>
+
+			<p>The <i>convergents</i> of a <i>simple</i> continued fraction \(x\) of the form</p>
+			<p>\[ x = a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3 + \cdots}}} =: [a_0; a_1, a_2, a_3, \dots] \]</p>
+			<p>are the approximations \(x_n \in \mathbb Q\) given by truncating the continued fraction at \(n\) terms. For example,</p>
+			<p>\[ x_0 = a_0, \]</p>
+			<p>\[ x_1 = a_0 + \frac{1}{a_1}, \]</p>
+			<p>\[ x_2 = a_0 + \frac{1}{a_1 + \frac{1}{a_2}}, \]</p>
+			<p>\[ x_3 = a_0 + \frac{1}{a_1 + \frac{1}{a_2 + \frac{1}{a_3}}}. \]</p>
+
+			<p>When written as a fraction \(x_n = \frac{p_n}{q_n}\), it can be shown that the numerators and denominators of convergents follow the recurrence formulas</p>
+			<p>\[ p_n = a_n p_{n-1} + p_{n-2}, \quad q_n = a_n q_{n-1} + q_{n-2}, \quad \forall n \geq 2. \]</p>
+
+			<p>In the case of the square root of \(2\), we have \(x = \sqrt 2 = [1;2,2,2,\dots]\), so \(a_n = 2 \;\forall n \geq 1\) and this expression simplifies to the following linear recurrence relation with constant coefficients:</p>
+			<p>\[ p_n = 2 p_{n-1} + p_{n-2}, \quad q_n = 2 q_{n-1} + q_{n-2}, \quad \forall n \geq 2. \]</p>
+
+			<p>These are both recurrence relations similar to that of Fibonacci's sequence. Furthermore, like with the terms of Fibonacci's sequence, one can find a closed-form expression for the terms of these sequences \(p_n\) and \(q_n\). This would be our analogue of Binet's formula. Such a formula would be of the form</p>
+			<p>\[ p_n = A \mu^n + B \lambda^n, \quad q_n = C \mu^n + D \lambda^n, \quad \forall n \geq 1, \]</p>
+
+			<p>where \(\mu\) and \(\lambda\) are the real roots of the sequence's characteristic polynomial \(x^2 - 2x - 1\) and \(A,B,C,D \in \mathbb R\) are constant coefficients which will be determined by equating \(p_1, p_2, q_1, q_2\) with their known values (the problem's statement shows us that \(\frac{p_1}{q_1} = \frac{3}{2}\) and \(\frac{p_2}{q_2} = \frac{7}{5}\)). We can see \(\mu\) and \(\lambda\) are given by</p>
+			<p>\[ \mu, \lambda = \frac{2 \pm \sqrt{4 + 4}}{2} = \frac{2 \pm \sqrt 8}{2} = 1 \pm \sqrt 2. \]</p>
+
+			<p>Therefore, \(p_n\) and \(q_n\) would be given by</p>
+			<p>\[ p_n = A (1 + \sqrt 2)^n + B (1 - \sqrt 2)^n, \quad q_n = C (1 + \sqrt 2)^n + D (1 - \sqrt 2)^n, \quad \forall n \geq 1. \]</p>
+
+			<p>As was said before, we can substitute with \(n=1\) and \(2\) to find two systems of linear equations depending on \(A,B\) and \(C,D\):</p>
+			<p>\[ \left\{ \begin{array}{l}
+				p_1 = A (1 + \sqrt 2) + B (1 - \sqrt 2) = 3 \\
+				p_2 = A (1 + \sqrt 2)^2 + B (1 - \sqrt 2)^2 = 7
+			\end{array} \right. \quad \left\{ \begin{array}{l}
+				q_1 = C (1 + \sqrt 2) + D (1 - \sqrt 2) = 2 \\
+				q_2 = C (1 + \sqrt 2)^2 + D (1 - \sqrt 2)^2 = 5
+			\end{array} \right. \]</p>
+
+			<p>Solving these systems of linear equations (notice that the corresponding matrices are equal, so one could find the inverse of this matrix to solve both systems) gives the values</p>
+			<p>\[ A = \frac{1 + \sqrt 2}{2}, \quad B = \frac{1 - \sqrt 2}{2}, \quad C = \frac{2 + \sqrt 2}{4}, \quad D = \frac{2 - \sqrt 2}{4}, \]</p>
+			<p>which we can plug in the previous formulas. In short, the numerators and denominators of any convergent of the square root of \(2\) can be found with the formulas</p>
+
+			<p>\[ p_n = \frac{(1 + \sqrt 2)^{n+1} + (1 - \sqrt 2)^{n+1}}{2}, \quad q_n = \frac{(2 + \sqrt 2) (1 + \sqrt 2)^n + (2 - \sqrt 2) (1 - \sqrt 2)^n}{4}, \quad \forall n \geq 1. \]</p>
+
+			<p>Note the resemblance with the complex formulations of cosines and sines, which have</p>
+			<p>\[ \cos x = \frac{e^{ix} + e^{-ix}}{2}, \quad \sin x = \frac{e^{ix} - e^{-ix}}{2i}. \]</p>
+
+			<p>In fact, one could rewrite</p>
+			<p>\[ q_n = \frac{(1+\sqrt 2)^{n+1} - (1 - \sqrt 2)^{n+1}}{2 \sqrt 2}, \]</p>
+			<p>which is very similar to the sine's expression in this analogy. However, we will use the former expression for \(q_n\).</p>
+
+			<p>Now, we are interested in finding which values of \(n\) verify that \(p_n\) has more digits than \(q_n\). Recall that the number of digits of an integer \(m\) can be expressed as \(\lfloor \log_{10} m \rfloor + 1\), so we are interested in finding when \(\lfloor \log_{10} p_n \rfloor > \lfloor \log_{10} q_n \rfloor\). Observe that there is no nice expression for \(\log_{10} p_n\) since the previous formula involves a sum. However, as in problem 25's solution, we notice that \(\left\lvert 1 - \sqrt 2 \right\rvert \approx 0.4142 \lt 1\) so the second summand in both expressions approaches zero as \(n\) increases and we can approximate \(p_n \approx \frac{1}{2} (1 + \sqrt 2)^{n+1}\) and \(q_n \approx \frac{2 + \sqrt 2}{4} (1 + \sqrt 2)^n\). Both these approximations only get better and better as \(n\) increases. Therefore, we can fairly approximate these logarithms as</p>
+			<p>\[ \log_{10} p_n \approx \log_{10} \left( \frac{1}{2} (1 + \sqrt 2)^{n+1} \right) = n \log_{10}(1 + \sqrt 2) + \log_{10} \frac{1 + \sqrt 2}{2}, \]</p>
+			<p>\[ \log_{10} q_n \approx \log_{10} \left( \frac{2 + \sqrt 2}{4} (1 + \sqrt 2)^{n+1} \right) = n \log_{10}(1 + \sqrt 2) + \log_{10} \frac{2 + \sqrt 2}{4}. \]</p>
+
+			<p>Both these expressions are linear functions of \(n\) (Caution! these are \textit{linear functions} in the sense that they are degree \(1\) polynomials whose graphs are straight lines. Since they have non-zero intercept, they are not \textit{linear} in the linear algebra sense.) and they have the same slope, so let's denote the real functions</p>
+			<p>\[ P(x) := x \log_{10}(1 + \sqrt 2) + \log_{10} \frac{1 + \sqrt 2}{2}, \quad Q(x) := x \log_{10}(1 + \sqrt 2) + \log_{10} \frac{2 + \sqrt 2}{4}. \]</p>
+
+			<img src="figs/57-1.png" style="width: 90%;" />
+
+			<p>We will have that \(p_n\) has more digits than \(q_n\) if \(\lfloor P(n) \rfloor \gt \lfloor Q(n) \rfloor\). One way to find which values of \(n \in \mathbb N\) verify this is to find the regions in which \(x \in \mathbb R\) verifies it too and then check if those regions contain integer numbers. One of these regions is \([a,b)\) where \(P(a) = 0\) and \(Q(b) = 0\), since at \(x=a\), we have that \(\lfloor P(x) \rfloor\) goes from \(-1\) to \(0\) while \(Q(a) = -1\); and at \(x=b\), \(\lfloor Q(b) \rfloor\) goes up to \(0\). One can find these values \(a,b\) as follows:</p>
+			<p>\[ P(a) = a \log_{10} (1 + \sqrt 2) + \log_{10} \frac{1 + \sqrt 2}{2} = 0 \Longrightarrow a = - \frac{\log_{10} \frac{1 + \sqrt 2}{2}}{\log_{10}(1 + \sqrt 2)} = \frac{\log_{10} 2}{\log_{10}(1 + \sqrt 2)} - 1, \]</p>
+			<p>\[ Q(b) = b \log_{10} (1 + \sqrt 2) + \log_{10} \frac{2 + \sqrt 2}{4} = 0 \Longrightarrow b = - \frac{\log_{10} \frac{2 + \sqrt 2}{4}}{\log_{10}(1 + \sqrt 2)} = \frac{2 \log_{10} 2 - \log_{10}(2 + \sqrt 2)}{\log_{10}(1 + \sqrt 2)}. \]</p>
+
+			<p>These values are, approximately, \(a \approx -0.2136\) and \(b \approx 0.1797\). This means that \(\lfloor P(x) \rfloor \gt \lfloor Q(x) \rfloor\) for any \(x \in [-0.2136, 0.1797)\), and in particular, for \(x=0\), which is an integer. However, this doesn't mean that \(p_0 = 1\) has more digits than \(q_0 = 1\). This is because the approximation \(q_n \approx \frac{2 + \sqrt 2}{4} (1 + \sqrt 2)^n\) gives \(q_0 \approx \frac{2 + \sqrt 2}{4} \approx 0.8536 \lt 1\), which makes our "algorithm" think \(q_0\) has zero digits instead of one. We will suppose that this approximation is good enough as \(n\) increases so that we won't have to worry about this kind of errors for higher values of \(n\).</p>
+
+			<p>Notice that, since \(P(x)\) and \(Q(x)\) are linear functions with the same slope, the next region in which \(\lfloor P(x) \rfloor \gt \lfloor Q(x) \rfloor\) is just a translation of \([a,b)\) to the point where \(P(x) = 1\). This slope is \(\log_{10}(1 + \sqrt 2)\), so the interval is translated by \(d := \frac{1}{\log_{10}(1 + \sqrt 2)}\) and the next region is given by \([d + a, d + b)\). Approximately, this region is \([2.3989, 2.7922)\), as we can see in the graph of \(P(x)\) and \(Q(x)\). It doesn't contain any integers so we don't expect to find any of the interesting values of \(n\) in this interval.</p>
+
+			<p>Repeating this argument, the regions in which \(\lfloor P(x) \rfloor \gt \lfloor Q(x) \rfloor\) are given by the equally spaced intervals \(I_m := [md + a, md + b)\) for any \(m \in \mathbb Z\), though we will only care for values of \(m\) with \(m \geq 1\). The first intervals of these form are, approximately</p>
+			<p>\begin{align*}
+				m=1: \quad & I_1 = [d+a, d+b) \approx [2.3989,2.7922), \\
+				m=2: \quad & I_2 =[2d + a, 2d + b) \approx [5.0114, 5.4047), \\
+				m=3: \quad & I_3 = [3d + a, 3d + b) \approx [7.6239,8.0171), \\
+				m=4: \quad & I_4 = [4d + a, 4d + b) \approx [10.2364,10.6296).
+			\end{align*}</p>
+
+			<p>Of these intervals, only \(I_3\) contains an integer, which is \(n=8\). And indeed, as the statement says, the first convergent with more digits in the numerator than in the denominator is \(x_8\), which has \(p_8 = 1393\) and \(q_8 = 985\). Checking the following intervals, one can find that \(I_5\) doesn't have any integers but the interval \(I_6\) contains \(n=13\), so we will expect \(p_{13}\) to have more digits than \(q_{13}\). This is the case, since \(p_{13}= 114243\) and \(q_{13} = 80782\).</p>
+
+			<p>We can visualize what happens with every translation of these intervals by working in the <i>circle group</i>, that is, the real numbers modulo the integers \(\mathbb{R} / \mathbb{Z}\). This simply means discarding the integer part of the numbers we are working with and looking at their decimals. For example, if we want to look at \(\sqrt 2 \approx 1.4142\) in the circle group, it will be at the same place as \(0.4142\dots\), while every integer will be in the same place as \(0\). We will denote this decimal part of a number \(x \in \mathbb R\) as \(\overline x \in \mathbb R / \mathbb Z\). We can visualize this like this:</p>
+
+			<img src="figs/57-2.png" style="width: 40%;" />
+			
+			<p>So the intervals \(I_m\) in the group circle looks like this:</p>
+
+			<img src="figs/57-3.png" style="width: 90%;" />
+
+			<p>In this illustration, \(0\) being contained in the interval means that \(I_m\) contains an integer. In each step, the interval is shifted \(d\) units. If we could find a periodicity in how these intervals are shifted, we could exploit it to simplify our task. Unfortunately, \(d\) is an irrational number, which means that there is no periodicity in these intervals.</p>
+
+			<p>However, we have that \(d = \frac{1}{\log_{10}(1 + \sqrt 2)} = 2.6124961\dots\) is surprisingly well approximated by \(2.6125 = 2 + \frac{49}{80}\), which means that, after \(80\) translations, we will have shifted the interval to an amount very close to an integer. This means that the intervals in the group circle are very close to being periodic every \(80\) times:</p>
+			<p>\[ I_0 = [a,b) \approx [-0.2136, 0.1797), \quad I_{80} = [80d + a, 80d + b) \approx [208.7861, 209.1794). \]</p>
+			
+			<img src="figs/57-4.png" style="width: 90%;" />
+			
+			<p>This means that \(290 \in I_{80}\) and \(p_{290}\) has more digits than \(q_{290}\), which is true since they have \(112\) and \(111\) digits respectively.</p>
+
+			<p>To see how tight this approximation is, we can see that \(80d = \frac{80}{\log_{10}(1+\sqrt 2)} \approx 208.9996911\), which is within almost three ten-thousands of an integer. We notice that \(1000 \lt 383 d + b\), that is, in \(383\) shifts we get to the upper bound the question statement asks of us. If we approximate \(d \approx 2 + \frac{49}{80}\), after these \(383\) shifts the interval \(I_{383}\) will be about \(0.0015\) units away from its real value. With a bit of luck, our approximation will work fine.</p>
+
+			<p>Obviously, \(I_m\) will contain an integer \(n\) if if \(md + a \leq n \lt md + b\). Since \(b = a + (b-a)\), this means that \(I_m\) will contain \(n\) if and only if \(md + a \leq n\) and \(md + a \gt n - (b-a)\), that is, if \(md + a \in (n - (b-a), n]\). In the unit circle, this is equivalent to \(\overline{md + a} \in \left(\overline {a-b}, \overline 0\right]\), that is, that the left side of \(\overline I_m\) is between \(\overline{a-b}\) and \(\overline 0\) (this might feel ambiguous since there's no ordering in the unit circle and "between two numbers" could mean anything, but hopefully the illustrations convey clearly what this means). Notice that \(a-b\) is a constant and its decimal part is approximately \(0.606780\). This way, instead of asking whether \(\overline 0\) is contained in \(\overline I_m\), we will ask if \(\overline{md+a} \in \left( \overline{a-b}, \overline 0\right]\), which is somewhat easier.</p>
+
+			<img src="figs/57-5.png" style="width: 70%" />
+			<img src="figs/57-6.png" style="width: 70%" />
+
+
+			<p>Now, since we can fairly approximate \(d \approx 2 + \frac{49}{80}\), we could think that \(md+a\) falls close to rational numbers such as \(\frac{k}{80}, k \in \mathbb Z\). The number \(md\) does fall close to these fractions, but \(80 a \approx -17.084824\), which is almost a tenth from an integer, which means that \(md+a\) is not too close to being a fraction like \(\frac{k}{80}\). However, since \(a\) is not multiplied by \(m\), this tenth of a unit error is not amplified as \(m\) increases like the approximation error of \(d\) does. Therefore, let's say that \(a \approx -\frac{17}{80}\). This way, we have that \(md + a \approx (2 + \frac{49}{80})m - \frac{17}{80}\), which is always a fraction like \(\frac{k}{80}\).</p>
+			
+			<p>In the unit circle, we have \(\overline d \approx \overline{\frac{49}{80}}\) and \(\overline a \approx \overline{\frac{63}{80}}\), so that \(\overline{md+a} \approx \overline{\frac{49}{80} m - \frac{17}{80}}\). Notice that this means that \(\overline{md+a}\) is always falling in the subdivisions made by dividing the circle in \(80\) parts. This suggests that we can replace our faithful unit circle with an <i>\(80\)-element cyclic group</i>, like <i>the integers modulo \(80\)</i>, \(\mathbb Z_{80} := \mathbb Z / 80 \mathbb Z = \left\{ \overline 0, \overline 1, \dots, \overline{79} \right\}\). This way, we associate \(I_m\) and \(\overline{md+a} \approx \overline{\frac{49}{80} m - \frac{17}{80}} \in \mathbb R / \mathbb Z\) with \(c_m := \overline {49 m - 17} \in \mathbb Z_{80}\).</p>
+
+			<img src="figs/57-7.png" style="width: 70%" />
+
+			<p>Now, since \(80(a-b) \approx -31.45759\), we will have that \(\overline{md+a} \in (\overline{a-b},\overline 0]\) if \(c_m\) is any of the numbers \(\overline {-31} = \overline{49}, \overline{50}, \overline {51}, \dots, \overline {79}\) or \(\overline 0\).</p>
+			
+			<img src="figs/57-8.png" style="width: 70%" />
+
+			<p>This means that, if \(C \subseteq \mathbb Z_{80}\) is the set of these numbers from \(\overline{49}\) to \(\overline{0}\), \(I_m\) contains an integer if and only if \(c_m = \overline{49 m - 17} \in C\). For each of the numbers \(k \in C\), this is a modular equation of the form \(49 m - 17 \equiv k \pmod{80}\). We can solve this equation by adding \(17\) on both sides and multiplying by \(49^{-1}\), that is, the inverse modulo \(80\) of \(49\). This is a number that satisfies \(49 \cdot 49^{-1} \equiv 1 \pmod{80}\). It could be that no such number exists, which could make solving this equation much harder. However, a number \(x\) has an inverse modulo \(y\) if and only if \(x\) and \(y\) are coprime, which is the case here since \(49\) and \(80\) are coprime. This also means that the function \(\overline x \mapsto 49 \overline x\) is bijective and we know that we will find \(\lvert C \rvert = 32\) different solutions to this equation. Furthermore, this implies that we expect the solution to the problem to be about \(\frac{32}{80} \cdot 383 \approx 153\), since \(383\) was the number of interval shifts that we needed to do to get to \(1000\). Turns out that this is the correct answer! However, we can't be sure of this without plugging it in to the Project Euler website. Solving this modular equation, we can find the exact convergents that have more digits in the numerator than in the denominator.</p>
+
+			<p>Turns out that \(49^2 = 2401 = 30 \cdot 80 + 1\), so \(49\) is its own inverse modulo \(80\) and we get the solution</p>
+			<p>\[ m \equiv 49 (k + 17) \equiv 49k + 33 \pmod{80}. \]</p>
+
+			<p>Plugging the values of \(k \in C\) into this equation, we get the following solutions of \(\overline m\):</p>
+			<p>\[ \begin{array}{c|l}
+				k & 49 k + 33 \  (\mathrm{mod}\ {80}) \\ \hline
+				49 & 34 \\
+				50 & 3 \\
+				51 & 52 \\
+				52 & 21 \\
+				53 & 70 \\
+				54 & 39 \\
+				55 & 8 \\
+				56 & 57 \\
+				57 & 26 \\
+				58 & 75 \\
+				59 & 44 \\
+				60 & 13 \\
+				61 & 62 \\
+				62 & 31 \\
+				63 & 0 \\
+				64 & 49
+			\end{array} \quad \begin{array}{c|l}
+				k & 49 k + 33 \  (\mathrm{mod}\ {80}) \\ \hline
+				65 & 18 \\
+				66 & 67 \\
+				67 & 36 \\
+				68 & 5 \\
+				69 & 54 \\
+				70 & 23 \\
+				71 & 72 \\
+				72 & 41 \\
+				73 & 10 \\
+				74 & 59 \\
+				75 & 28 \\ 
+				76 & 77 \\
+				77 & 46 \\
+				78 & 15 \\
+				79 & 64 \\
+				0 & 33
+			\end{array} \]</p>
+
+			<p>Ordering these values, we get the \(32\) following values of \(m\) modulo \(80\) such that \(I_m\) contains an integer:</p>
+			<p>\[ \begin{array}{cccccccc}
+				0 & 3 & 5 & 8 & 10 & 13 & 15 & 18 \\
+				21 & 23 & 26 & 28 & 31 & 33 & 34 & 36 \\
+				39 & 41 & 44 & 46 & 49 & 52 & 54 & 57 \\
+				59 & 62 & 64 & 67 & 70 & 72 & 75 & 77	
+			\end{array} \]</p>
+
+			<p>As we said, \(1000 \lt 383 d + b\) and \(383 = 4 \cdot 80 + 63\). This means that, before getting to \(m=383\), \(c_m\) hits all values in \(\mathbb Z_{80}\) \(4\) times and the \(32\) solutions, and then, it hits all the values with \(m \lt 63\), which in the previous table has \(26\) solutions. So in total, we hit \(32 \cdot 4 + 26 = 154\) solutions. Finally, we need to substract one since we are counting \(m = 0\), which we have already argued is not a real solution, so our final answer is \(153\).</p>
+
+			<p>As an extra, let's find the values of \(n\) such that \(x_n\) has more digits in the numerator than in the denominator. For each solution \(m\), we can find the number \(n \in I_m\) by writing \(n = \lceil md + a \rceil\):</p>
+			<p>\[ \begin{array}{c|l}
+				m & \lceil md + a \rceil \\ \hline
+				0 & 0 \\
+				3 & 8 \\
+				5 & 13 \\
+				8 & 21 \\
+				10 & 26 \\
+				13 & 34 \\
+				15 & 39 \\
+				18 & 47 \\
+				21 & 55 \\
+				23 & 60 \\
+				26 & 68 \\
+				28 & 73 \\
+				31 & 81 \\
+				33 & 86 \\
+				34 & 89 \\
+				36 & 94 
+			\end{array} \quad \begin{array}{c|l}	
+				m & \lceil md + a \rceil \\ \hline
+				39 & 102 \\
+				41 & 107 \\
+				44 & 115 \\
+				46 & 120 \\
+				49 & 128 \\
+				52 & 136 \\
+				54 & 141 \\
+				57 & 149 \\
+				59 & 154 \\
+				62 & 162 \\
+				64 & 167 \\
+				67 & 175 \\
+				70 & 183 \\
+				72 & 188 \\
+				75 & 196 \\
+				77 & 201
+			\end{array} \]</p>
+
+			<p>So if \(N\) is the following set of numbers:</p>
+			<p>\[ \begin{array}{cccccccc}
+				0 & 8 & 13 & 21 & 26 & 34 & 39 & 47 \\
+				55 & 60 & 68 & 73 & 81 & 86 & 89 & 94 \\
+				102 & 107 & 115 & 120 & 128 & 136 & 141 & 149 \\
+				154 & 162 & 167 & 175 & 183 & 188 & 196 & 201
+			\end{array} \]</p>
+
+			<p>then the convergent \(x_n, n \gt 0\) has one more digit in the numerator than in the denominator if and only if we can write \(n = s + 209 t\) for \(s \in N\) and \(t \in \mathbb Z\), where \(209\) comes from approximating \(80 d\). Therefore, the \(153\) values of \(n\) the problem is asking for are exactly</p>
+			<p>\[ \begin{array}{cccccccc}
+				 & 8 & 13 & 21 & 26 & 34 & 39 & 47 \\
+				55 & 60 & 68 & 73 & 81 & 86 & 89 & 94 \\
+				102 & 107 & 115 & 120 & 128 & 136 & 141 & 149 \\
+				154 & 162 & 167 & 175 & 183 & 188 & 196 & 201 \\ \hline
+				209 & 217 & 222 & 230 & 235 & 243 & 248 & 256 \\
+				264 & 269 & 277 & 282 & 290 & 295 & 298 & 303 \\
+				311 & 316 & 324 & 329 & 337 & 345 & 350 & 358 \\
+				363 & 371 & 376 & 384 & 392 & 397 & 405 & 410 \\ \hline
+				418 & 426 & 431 & 439 & 444 & 452 & 457 & 465 \\
+				473 & 478 & 486 & 491 & 499 & 504 & 507 & 512 \\
+				520 & 525 & 533 & 538 & 546 & 554 & 559 & 567 \\
+				572 & 580 & 585 & 593 & 601 & 606 & 614 & 619 \\ \hline
+				627 & 635 & 640 & 648 & 653 & 661 & 666 & 674 \\
+				682 & 687 & 695 & 700 & 708 & 713 & 716 & 721 \\
+				729 & 734 & 742 & 747 & 755 & 763 & 768 & 776 \\
+				781 & 789 & 794 & 802 & 810 & 815 & 823 & 828 \\ \hline
+				836 & 844 & 849 & 857 & 862 & 870 & 875 & 883 \\
+				891 & 896 & 904 & 909 & 917 & 922 & 925 & 930 \\
+				938 & 943 & 951 & 956 & 964 & 972 & 977 & 985 \\
+				990 & 998	
+			\end{array} \]</p>
+			
+			<p class="sign">- dino (2026/01/16)</p>
+		</details>
+
+
 		<h2 id="problem-63"><a href="https://projecteuler.net/problem=63">63.- Powerful Digit Counts</a></h2>
 		<p>The \(5\)-digit number, \(16807=7^5\), is also a fifth power. Similarly, the \(9\)-digit number, \(134217728=8^9\), is a ninth power.</p>
 		<p>How many \(n\)-digit positive integers exist which are also an \(n\)<sup>th</sup> power?</p>
 
+
 		<details>
 			<summary>Solution</summary>
 			<p>It is clear that \(10^n\) is a one followed by \(n\) zeros, so it has \(n+1\) digits for any integer \(n\) and therefore cannot be an \(n\)<sup>th</sup> power with \(n\) digits. Also, for any base \(a \in \mathbb N\) with \(a \geq 10\), we will have \(a^n \geq 10^n\), so \(a^n\) will have \(n+1\) digits or more, so it won't work either. Therefore, we know that these numbers will be of the form \(a^n\) with \(a < 10\).</p>
-			<p>It's easy to see that \(a^1\) has \(1\) digit for each \(a < 10\), so the ten digits are trivially \(1\)-digit positive integers that are also "\(1\)<sup>st</sup> powers". Now, since \(a < 10\), if \(a^n\) fails to be an \(n\)-digit number, it follows that \(a^{n+1} = a^n \cdot a\) will also fail to be an \(n+1\)-digit number and, in general, \(a^m\) won't be an \(m\)-digit number for any \(m \geq n\). Therefore, for each base \(a\), we just have to check when \(a^n\) fails to be an \(n\)-digit number and all powers below it will work for us.</p>
+			<p>It's easy to see that \(a^1\) has \(1\) digit for each \(a \lt 10\), so the ten digits are trivially \(1\)-digit positive integers that are also "\(1\)<sup>st</sup> powers". Now, since \(a \lt 10\), if \(a^n\) fails to be an \(n\)-digit number, it follows that \(a^{n+1} = a^n \cdot a\) will also fail to be an \(n+1\)-digit number and, in general, \(a^m\) won't be an \(m\)-digit number for any \(m \geq n\). Therefore, for each base \(a\), we just have to check when \(a^n\) fails to be an \(n\)-digit number and all powers below it will work for us.</p>
 
 			<p>For example, \(2^2 = 4\) is not a \(2\)-digit number, so we know that the only power with base \(2\) that we want is \(2^1\). The same thing happens with \(3\), since \(3^2 = 9\). However, \(4\) has that \(4^2 = 16\) is a \(2\)-digit number, but \(4^3 = 64\) doesn't have \(3\) digits. Checking all values for \(a\), we have</p>
 			<p>\[ \begin{array}{clc}
@@ -546,7 +798,7 @@
 		<details>
 			<summary>Solution</summary>	
 			<p>We can make use of Euler's totient function's properties to solve this problem. For a start, it is multiplicative, which in the context of number theory means that \(\phi(n m) = \phi(n) \phi(m)\) if \(n\) and \(m\) are coprime numbers. For example, \(\phi(6) = \phi(2) \phi(3) = 1 \cdot 2 = 2\), so \(6 / \phi(6) = 3\). Another thing we notice is that every number under a prime number \(p\) is relatively prime with \(p\), so \(\phi(p) = p-1\) and \(p / \phi(p) = 1 + \frac{1}{p-1}\).</p>
-			<p>But most importantly, we notice that when we multiply a number \(n\) by one of its prime factors \(p\), the resulting ration \(np / \phi(np)\) is the same as \(n / \phi(n)\). This is because there are \(\phi(n)\) numbers relatively prime to \(n p\) from \(1\) to \(n\); there are \(\phi(n)\) relatively prime numbers from \(n+1\) to \(2n\); and so on: there are \(\phi(n)\) relatively prime numbers in every interval \(kn+1\) to \((k+1) n\), and since there are \(p\) of these intervals, \( \phi(np) = \phi(n) p \), so \(np / \phi(np) = np / (\phi(n) p) = n / \phi(n)\). For example, \(\phi(6) = 2\), \(\phi(12) = 4\) and \(\phi(18) = 6\), and these three numbers have the same ratio \(n / \phi(n) = 3\).</p>
+			<p>But most importantly, we notice that when we multiply a number \(n\) by one of its prime factors \(p\), the resulting ratio \(np / \phi(np)\) is the same as \(n / \phi(n)\). This is because there are \(\phi(n)\) numbers relatively prime to \(n p\) from \(1\) to \(n\); there are \(\phi(n)\) relatively prime numbers from \(n+1\) to \(2n\); and so on: there are \(\phi(n)\) relatively prime numbers in every interval \(kn+1\) to \((k+1) n\), and since there are \(p\) of these intervals, \( \phi(np) = \phi(n) p \), so \(np / \phi(np) = np / (\phi(n) p) = n / \phi(n)\). For example, \(\phi(6) = 2\), \(\phi(12) = 4\) and \(\phi(18) = 6\), and these three numbers have the same ratio \(n / \phi(n) = 3\).</p>
 			<p>Therefore, if we factorize a number \(n\), we don't care about the exponents over its prime factors, but just what prime factors it has. Since \(p / \phi(p) = 1 + \frac{1}{p-1}\) is greater than \(1\) but also decreases as \(p\) increases, we want this number \(n\) to have many prime factors and for these prime numbers to be small. If one of these factors is raised to some power different than \(1\), we are making \(n\) unnecessarily large and we might be loosing the chance to add more prime factors. Therefore, the ideal number would be one like \(2 \cdot 3 \cdot 5 \cdot 7\), the product of succesive prime numbers. These numbers are called the <i>primorials</i>. A list of the first primorials can be found in the OEIS as sequence <a href="https://oeis.org/A002110">A002110</a>.</p>
 			<p>We can see that \(2 \cdot 3 \cdot 5 \cdot 7 \cdot 11 \cdot 13 \cdot 17 = 510510\), while the next primorial is \(510510 \cdot 19 = 9699690\), which is greater than \(1000000\). Therefore, our answer is \(510510\), which has \(\phi(510510) = 92160\) and \(510510/\phi(510510) = 510510/92160 \approx 5.5394\).</p>
 			<p class="sign">- dino (2025/04/07)</p>
